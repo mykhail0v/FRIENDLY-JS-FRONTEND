@@ -17,7 +17,7 @@ const user = {
 const data = null //Null
 
 //строки
-const greeting = 'Hello'
+const greeting = "Hello"
 const userName = 'Alex'
 const goodbye = `Goodbye`
 
@@ -152,7 +152,7 @@ const str = '222'
 const result = num + str
 
 console.log(result)
-console.log(typeof result)
+console.log(typeof result)//string
 
 console.log('16' / '8') //2
 console.log(typeof ('16' / '8')) //number
