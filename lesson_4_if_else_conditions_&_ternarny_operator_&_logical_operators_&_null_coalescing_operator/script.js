@@ -117,7 +117,7 @@ const hasFreeTime = true
 if (name1 !== "Никита") {
     console.log('Вы не Никита, позовите Никиту')
 } else if(age < 16) {
-    console.log ('Ущё рано думать о взрослой жизни')
+    console.log ('Ещё рано думать о взрослой жизни')
 }else if (
     !hasMuchMoney || 
     !hasGoodJob || 
@@ -138,6 +138,12 @@ const b = 100
 
 const RESULT1 = a || b
 const RESULT2 = a ?? b // оператор нулевого слияния проверяет,не является ли null или undefined операнд слева и возвращает его значение, в противном случае возвращает значение справа.
+/*
 
+Если левое_значение не равно null и не равно undefined, то возвращается левое_значение.
+
+Если левое_значение равно null или undefined, то возвращается правое_значение.
+
+*/
 console.log(RESULT1) 
 console.log(RESULT2)
