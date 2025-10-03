@@ -170,11 +170,14 @@
 
 // console.log( getAgeType (125))
 
-function getSecretMessage(name) {
-    if (!name) return // проверка, что бы небыло тупости с undefined 
-    return `O, а я тебя знаю! Ты же тот самый ${name}?`
-}
+// function getSecretMessage(name) {
+//     if (!name) return // проверка, что бы небыло тупости с undefined 
+//     return `O, а я тебя знаю! Ты же тот самый ${name}?`
+// }
 
-console.log(
-    getSecretMessage('Вася')
-)
+// console.log(
+//     getSecretMessage('Вася')
+// )
+
+/////////////////////////////////////////////////////////
+
