@@ -136,7 +136,7 @@
 // можно то же самое так:
 
 // const obj1 = {name: 'Александр'}
-// const obj2 = Object.assign({}, obj1) // встроенный функционал JS // вторым, тритим и т.д. аргументом можно передать сколько угодно много объектов, и все их свойства будут записаны в целевой
+// const obj2 = Object.assign({}, obj1) // встроенный функционал JS // вторым, третьим и т.д. аргументом можно передать сколько угодно много объектов, и все их свойства будут записаны в целевой объект
 
 // console.log(obj2)
 
@@ -318,19 +318,19 @@
 
 /////////////////////////////////////////////////////////////
 
-// const user = {
-//     name: 'Никита',
-//     age: 24,
-//     isDeveloper: true,
-// }
+const user = {
+    name: 'Никита',
+    age: 24,
+    isDeveloper: true,
+}
 
-// const { name, age, isDeveloper, address
-//  } = user // можно и через let
+const { name, age, isDeveloper, address
+ } = user // можно и через let
 
-// console.log('name:', name)
-// console.log('age:', age)
-// console.log('isDeveloper:', isDeveloper)
-// console.log('address', address) // undefined
+console.log('name:', name)
+console.log('age:', age)
+console.log('isDeveloper:', isDeveloper)
+console.log('address', address) // undefined
 
 ///////////////////////////////////////////////////////////////////
 
