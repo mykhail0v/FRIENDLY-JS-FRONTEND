@@ -340,13 +340,169 @@
 
 */
 
-const person = {
-    firstName: 'Никита',
-    lastName: 'Михайлов',
-    age: 24,
-    city: 'Одесса',
+// const person = {
+//     firstName: 'Никита',
+//     lastName: 'Михайлов',
+//     age: 24,
+//     city: 'Одесса',
+// }
+
+// const {firstName, age} = person
+
+// console.log(firstName, age)
+
+//////////////////////////////////////////////
+
+/* Задача 1: Расширенный калькулятор
+Напиши функцию advancedCalculator, которая принимает один аргумент — объект с такой структурой:
+
+{
+  num1: 5,
+  num2: 10,
+  operator: '*'
+}
+Функция должна выполнять арифметическую операцию, указанную в свойстве operator, над числами num1 и num2.
+
+Усложнение:
+
+Используй деструктуризацию прямо в параметрах функции, чтобы сразу получить num1, num2 и operator в переменные.
+
+Добавь проверку на деление на ноль. Если num2 равно 0 и operator — это '/', функция должна возвращать строку "Ошибка: деление на ноль!".
+
+Если в operator передано что-то, кроме '+', '-', '*' или '/', функция должна возвращать строку "Неизвестный оператор".
+*/
+
+// const advancedCalculator = ({num1, num2, operator}) => {
+//     if(!'+-*/'.includes(operator)) return('Неизвестный оператор')
+//     switch (operator) {
+//         case '+':
+//             return num1 + num2;
+//         case '-':
+//             return num1 - num2;
+//         case '*':
+//             return num1 * num2;
+//         case '/':
+//             if (num2 === 0) return('Ошибка, на 0 делить нельзя!')
+//             return num1 / num2;
+//     }
+// }
+
+// console.log(advancedCalculator({ num1: 1, num2: 2, operator: '+' })) 
+// console.log(advancedCalculator({ num1: 10, num2: 0, operator: '/' })) 
+// console.log(advancedCalculator({ num1: 5, num2: 5, operator: '%' }))
+
+////////////////////////////////////////////////////////////////////////////
+
+/* Задача 2: Управление профилем пользователя
+
+Создай объект userProfile со свойствами name, age, email и isAdmin (булево значение).
+
+Напиши стрелочную функцию updateProfile, которая принимает два аргумента:
+
+Объект профиля (profile).
+
+Объект с обновлениями (updates).
+
+Функция должна:
+
+Создать полную копию исходного объекта profile, чтобы не изменять его.
+
+Перебрать все свойства из объекта updates с помощью цикла for...in.
+
+Для каждого свойства в updates проверить, существует ли такое же свойство в скопированном профиле.
+
+Если свойство существует, обновить его значение в копии.
+
+Вернуть новый, обновленный объект.
+
+
+*/
+
+// const userProfile = { 
+//     name: 'Иван', 
+//     age: 30, 
+//     email: 'ivan@example.com', 
+//     isAdmin: false,
+// }
+
+// const updates = { 
+//     age: 31, 
+//     isAdmin: true, 
+// }
+
+// const updateProfiles = (profile, updates) => {
+//     const profileCopy = Object.assign({}, profile)
+
+//     for (const update in updates) {
+//         if (update in profileCopy) {
+//             profileCopy[update] = updates[update]
+//         }
+
+//     }
+
+//     return profileCopy
+// }
+
+// console.log(updateProfiles(userProfile, updates))
+// console.log(userProfile)
+
+// или:
+
+// const updateProfiles = (profile, updates) => {
+//      const profileCopy = {...profile, ...updates}
+//      return profileCopy
+// }
+
+// console.log(updateProfiles(userProfile, updates))
+
+/* Задача 3: Генератор отчетов
+Напиши функцию createReport, которая принимает объект с данными о продажах. Структура объекта может быть произвольной, например:
+
+const salesData = {
+  manager: 'Анна',
+  totalSales: 1500,
+  region: 'Центр',
+  productsSold: 45
+};
+Функция должна перебрать все свойства объекта и вернуть отформатированную многострочную строку-отчет.
+
+Усложнение:
+
+Используй цикл for...in для перебора свойств.
+
+Внутри цикла используй if/else или тернарный оператор, чтобы по-разному форматировать разные ключи. Например:
+
+Если ключ — 'manager', строка должна быть "Главный по продажам: [значение]".
+
+Если ключ — 'totalSales', строка должна быть "Сумма продаж: [значение] $".
+
+Для всех остальных ключей — стандартный формат "[ключ]: [значение]".
+
+Собери все строки в одну и верни ее.
+
+*/
+
+const salesData = {
+  manager: 'Анна',
+  totalSales: 1500,
+  region: 'Центр',
+  productsSold: 45
+};
+
+const createReport = (object) => {
+    let reportString = '';
+    for (const key in object) {
+        let line
+        if (key === 'manager') {
+            line = `Главный по продажам: ${object[key]}`
+        } else if (key === 'totalSales') {
+            line = `Сумма продаж: ${object[key]}`
+        } else {
+            line = `${key}: ${object[key]}`
+        }
+        reportString += line + '\n'
+    }
+    return reportString
 }
 
-const {firstName, age} = person
-
-console.log(firstName, age)
+console.log(createReport(salesData))

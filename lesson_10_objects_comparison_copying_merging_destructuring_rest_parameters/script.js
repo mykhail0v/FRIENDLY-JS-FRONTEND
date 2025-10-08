@@ -49,6 +49,15 @@
 //         }
 //     }
 
+// /*
+// Когда мы пытаемся получить значение по НЕСУЩЕСТВУЮЩЕМУ ключу в JavaScript, мы получаем undefined.
+
+// В итоге сравнение выглядит так: 28 !== undefined.
+
+// Это условие истинное!
+
+// */
+
 //     return true
 // }
 
@@ -214,7 +223,7 @@
 
 // const user = { ...obj1, ...obj2, ...obj3}
 
-// console.log('user:', user) // при объединении объектов с вложенными объектами запишется содержимое только последнего объекта. Для записи всех свойст нужно использовать сторонние библиотеки или собственные костыли.
+// console.log('user:', user) // при объединении объектов с вложенными объектами запишется содержимое только последнего объекта. Для записи всех свойст нужно использовать сторонние библиотеки или собственные костыли(о них позже).
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -223,10 +232,10 @@
 // const user = {
 //     name: 'Никита',
 //     age: 24,
-//     // address: {
-//     //     city: 'Odessa',
-//     //     zipcode: 123456,
-//     // },
+//     address: {
+//         city: 'Odessa',
+//         zipcode: 123456,
+//     },
 // }
 
 // console.log(user.address?.city) // ?. значит: "если в объекте есть свойство с именем address и если это свойство - объект, обратись к свойству "city" этого объекта" (используеться довольно часто)
@@ -253,7 +262,7 @@
 // const logGuestInfo = (guest) => {
 //     const chekoutDate = guest.orderInfo && guest.orderInfo.stayDates && guest.orderInfo.stayDates.to 
 //         ? guest.orderInfo.stayDates.to
-//         : null // это выражение можно упроостить
+//         : null // это выражение можно упростить
 
 
 //     console.log(`
@@ -318,19 +327,19 @@
 
 /////////////////////////////////////////////////////////////
 
-const user = {
-    name: 'Никита',
-    age: 24,
-    isDeveloper: true,
-}
+// const user = {
+//     name: 'Никита',
+//     age: 24,
+//     isDeveloper: true,
+// }
 
-const { name, age, isDeveloper, address
- } = user // можно и через let
+// const { name, age, isDeveloper, address
+//  } = user // можно и через let
 
-console.log('name:', name)
-console.log('age:', age)
-console.log('isDeveloper:', isDeveloper)
-console.log('address', address) // undefined
+// console.log('name:', name)
+// console.log('age:', age)
+// console.log('isDeveloper:', isDeveloper)
+// console.log('address', address) // undefined
 
 ///////////////////////////////////////////////////////////////////
 
@@ -436,7 +445,7 @@ console.log('address', address) // undefined
 //     age: 5,
 // }
 
-// const {city = 'не указан'} = user2 // значение по умолчанию, если в объекте нет ожидаемого свойства (используется часто)
+// const {city = 'не указан'} = user1 // значение по умолчанию, если в объекте нет ожидаемого свойства (используется часто)
 
 // console.log('Город:', city)
 
@@ -456,26 +465,26 @@ console.log('address', address) // undefined
 
 // ОСТАТОЧНЫЕ параметры
 
-const logUser = (user) => {
-    const {name, age, city, ...otherInfo} = user // остаточные параметры можно прописать только в конце (часто используется на практике)
+// const logUser = (user) => {
+//     const {name, age, city, ...otherInfo} = user // остаточные параметры можно прописать только в конце (часто используется на практике)
 
 
-    console.log(`
-        Имя: ${name}
-        Возраст: ${age}
-        Город: ${city} 
-    `)
+//     console.log(`
+//         Имя: ${name}
+//         Возраст: ${age}
+//         Город: ${city} 
+//     `)
 
-    console.log('Доп. инфа:', otherInfo)
+//     console.log('Доп. инфа:', otherInfo)
 
-}
+// }
 
-logUser({
-    name: 'Никита',
-    age: 28,
-    city: 'Odessa',
-    company: 'Google',
-    jobPost: 'Frontend-developer',
-    yearsOfExperience: 10,
-    hasCat: true, 
-})
+// logUser({
+//     name: 'Никита',
+//     age: 28,
+//     city: 'Odessa',
+//     company: 'Google',
+//     jobPost: 'Frontend-developer',
+//     yearsOfExperience: 10,
+//     hasCat: true, 
+// })
