@@ -1,3 +1,5 @@
+'use strict'
+
 /* Задача 1
 Калькулятор возраста:
 
@@ -353,7 +355,7 @@
 
 //////////////////////////////////////////////
 
-/* Задача 1: Расширенный калькулятор
+/* Задача 17: Расширенный калькулятор
 Напиши функцию advancedCalculator, которая принимает один аргумент — объект с такой структурой:
 
 {
@@ -393,7 +395,7 @@
 
 ////////////////////////////////////////////////////////////////////////////
 
-/* Задача 2: Управление профилем пользователя
+/* Задача 18: Управление профилем пользователя
 
 Создай объект userProfile со свойствами name, age, email и isAdmin (булево значение).
 
@@ -455,7 +457,7 @@
 
 // console.log(updateProfiles(userProfile, updates))
 
-/* Задача 3: Генератор отчетов
+/* Задача 19: Генератор отчетов
 Напиши функцию createReport, которая принимает объект с данными о продажах. Структура объекта может быть произвольной, например:
 
 const salesData = {
@@ -482,27 +484,351 @@ const salesData = {
 
 */
 
-const salesData = {
-  manager: 'Анна',
-  totalSales: 1500,
-  region: 'Центр',
-  productsSold: 45
+// const salesData = {
+//   manager: 'Анна',
+//   totalSales: 1500,
+//   region: 'Центр',
+//   productsSold: 45
+// };
+
+// const createReport = (object) => {
+//     let reportString = '';
+//     for (const key in object) {
+//         let line
+//         if (key === 'manager') {
+//             line = `Главный по продажам: ${object[key]}`
+//         } else if (key === 'totalSales') {
+//             line = `Сумма продаж: ${object[key]}`
+//         } else {
+//             line = `${key}: ${object[key]}`
+//         }
+//         reportString += line + '\n'
+//     }
+//     return reportString
+// }
+
+// console.log(createReport(salesData))
+
+//////////////////////////////////////////////////////////////
+
+/*
+Задача 20: Вложенная деструктуризация
+Создай сложный объект, описывающий заказ в интернет-магазине:
+
+JavaScript
+
+const order = {
+  id: 'A-123',
+  details: {
+    productName: 'Ноутбук',
+    price: 1200,
+    quantity: 1
+  },
+  customer: {
+    name: 'Петр',
+    contact: {
+      email: 'petr@example.com',
+      phone: '123-456-789'
+    }
+  },
+  shipping: {
+    address: 'ул. Главная, 10',
+    method: 'Курьерская доставка'
+  }
+};
+Напиши функцию getShippingInfo, которая принимает этот объект заказа.
+
+Задача:
+
+Используя вложенную деструктуризацию, извлеки из объекта order только productName, customer.name и shipping.address в переменные.
+
+Функция должна вернуть строку формата: "Привет, [имя клиента]! Ваш заказ '[название продукта]' будет доставлен по адресу: [адрес доставки]."
+*/
+
+// const order = {
+//   id: 'A-123',
+//   details: {
+//     productName: 'Ноутбук',
+//     price: 1200,
+//     quantity: 1
+//   },
+//   customer: {
+//     name: 'Петр',
+//     contact: {
+//       email: 'petr@example.com',
+//       phone: '123-456-789'
+//     }
+//   },
+//   shipping: {
+//     address: 'ул. Главная, 10',
+//     method: 'Курьерская доставка'
+//   }
+// }
+
+// const getShippingInfo = (order) => {
+//     const {details: {productName}, customer: {name: customerName}, shipping: {address: shippingAddress}} = order
+//     return `Привет, ${customerName}! Ваш заказ "${productName}" будет доставлен по адресу: ${shippingAddress}.`
+// }
+
+// console.log(getShippingInfo(order))
+
+//////////////////////////////////////////////////////////
+
+/*
+Задача 21: Динамическое создание объекта
+Напиши функцию createObjectFromInput, которая ничего не принимает в качестве аргументов.
+
+Задача:
+
+Создай внутри функции пустой объект.
+
+Используя цикл do...while, запрашивай у пользователя ввод данных в формате "ключ:значение". Например, "имя:Никита".
+
+Продолжай запрашивать ввод, пока пользователь не нажмет "Отмена" или не введет пустую строку.
+
+Каждую введенную строку нужно "распарсить": найти, где находится двоеточие, отделить ключ от значения и добавить эту пару в созданный объект.
+
+После завершения цикла функция должна вернуть созданный объект.
+
+Подсказка: для разделения строки по символу можно использовать метод .split(':'), который ты, возможно, еще не проходил, но можешь найти информацию о нем. Это будет полезным упражнением. Если не хочешь пока забегать вперед, можешь использовать for и искать индекс двоеточия.
+*/
+
+// const createObjectFromInput = () => {
+//     const object = {}
+//     let usersData
+//     do {
+//         usersData = prompt('Введите свои данные в формате "ключ:значение". Например, "имя:Никита"')
+//         if(usersData) {
+//              let [key, value] = usersData.split(':').map(item => item.trim());
+//             object[key] = value
+//         }
+//     } while(usersData)
+//     return object
+// }
+
+// const finalObject = createObjectFromInput()
+// console.log('Итоговый объект:', finalObject)
+
+// вот как можно решить с нарезской строк (решение Gemini): 
+
+// const createObjectFromInputWithFor = () => {
+//     const object = {};
+//     let usersData;
+//     do {
+//         usersData = prompt('Введите свои данные в формате "ключ:значение".');
+//         if (usersData) {
+//             let colonIndex = -1; // Изначально считаем, что двоеточия нет
+
+//             // 1. Ищем индекс первого двоеточия в строке
+//             for (let i = 0; i < usersData.length; i++) {
+//                 if (usersData[i] === ':') {
+//                     colonIndex = i; // Сохраняем индекс
+//                     break;          // Выходим из цикла, так как нам нужно только первое
+//                 }
+//             }
+
+//             // 2. Если двоеточие было найдено (индекс изменился)
+//             if (colonIndex !== -1) {
+//                 // 3. "Нарезаем" строку на ключ и значение, используя найденный индекс
+//                 const key = usersData.slice(0, colonIndex).trim();
+//                 const value = usersData.slice(colonIndex + 1).trim();
+
+//                 // Добавляем в объект, только если ключ не пустой
+//                 if (key) {
+//                     object[key] = value;
+//                 }
+//             }
+//         }
+//     } while (usersData);
+//     return object;
+// };
+
+// const finalObject = createObjectFromInputWithFor();
+// console.log('Итоговый объект:', finalObject);
+
+//////////////////////////////////////////////////////////////////
+
+/*
+Задача 22: Анализатор объекта
+Цель: Попрактиковаться в работе с объектами, циклами и условиями.
+
+Напиши функцию analyzeObject(obj). Эта функция должна принимать объект и возвращать новый объект с двумя свойствами:
+
+stringCount: количество свойств, значения которых являются строками.
+
+numberSum: сумма всех числовых значений в объекте.
+
+Функция должна игнорировать свойства с другими типами данных.
+
+JavaScript
+
+// Пример объекта для теста
+const testData = {
+  name: "John Doe",
+  age: 30,
+  city: "New York",
+  hasCar: true,
+  salary: 5000,
+  bonus: 1500.50,
+  position: "Developer"
 };
 
-const createReport = (object) => {
-    let reportString = '';
-    for (const key in object) {
-        let line
-        if (key === 'manager') {
-            line = `Главный по продажам: ${object[key]}`
-        } else if (key === 'totalSales') {
-            line = `Сумма продаж: ${object[key]}`
-        } else {
-            line = `${key}: ${object[key]}`
-        }
-        reportString += line + '\n'
-    }
-    return reportString
+// Ожидаемый результат вызова функции:
+// { stringCount: 3, numberSum: 6530.5 }
+*/
+
+// const employee= {
+//   name: "John Doe",
+//   age: 30,
+//   city: "New York",
+//   hasCar: true,
+//   salary: 5000,
+//   bonus: 1500.50,
+//   position: "Developer"
+// }
+
+// const analyzeObject = (obj) => {
+//     let stringCount = 0
+//     let numberSum = 0
+//     for (const key in obj) {
+//         if (typeof obj[key] === 'string') {
+//             stringCount += 1
+//         }
+//         if (typeof obj[key] === 'number') {
+//             numberSum += obj[key]
+//         }
+//     }
+
+//     return {stringCount, numberSum}
+// }
+
+// console.log(analyzeObject(employee))
+
+///////////////////////////////////////////////////
+
+/* Задача 23
+
+Анализ строки
+Напиши стрелочную функцию analyzeString(str), которая принимает строку и возвращает объект с информацией о ней.
+
+Требования:
+
+Функция должна вернуть объект с тремя свойствами: length (длина строки), firstChar (первый символ) и lastChar (последний символ).
+
+Для извлечения свойств из итогового объекта в коде проверки используй деструктуризацию.
+
+JavaScript
+
+// Пример использования:
+const result = analyzeString("JavaScript");
+const { length, firstChar, lastChar } = result;
+
+console.log(length);      // Ожидаемый результат: 10
+console.log(firstChar);   // Ожидаемый результат: "J"
+console.log(lastChar);    // Ожидаемый результат: "t"
+*/
+
+// const analyzeString = (str) => {
+//     const length = str.length
+//     let firstChar
+//     let lastChar  
+//     for(let i = 0; i <str.length; i++ ) {
+//         if (i === 0) {
+//             firstChar = str[i]
+//         }
+//         if (i === str.length - 1) {
+//             lastChar = str[i]
+//         }
+//     } return { length, firstChar, lastChar}
+// }
+
+// const result = analyzeString("JavaScript");
+// const { length, firstChar, lastChar } = result;
+
+// console.log(length);      // Ожидаемый результат: 10
+// console.log(firstChar);   // Ожидаемый результат: "J"
+// console.log(lastChar);    // Ожидаемый результат: "t"
+
+// or 
+
+// const analyzeString = () => {
+//     return {
+//         length: str.length,
+//         firstChar: str[0],
+//         lastChar: str[lenght - 1]
+//     }
+// }
+
+// // or
+
+// const analyzeStringConcise = (str) => ({
+//   length: str.length,
+//   firstChar: str[0],
+//   lastChar: str.at(-1) // .at(-1) - это более современный способ получить последний элемент
+// });
+
+/////////////////////////////////////////////////////////
+
+/* Задача 24
+
+Проверка доступа
+Напиши функцию checkAccess(age, hasLicense), которая определяет, может ли человек водить машину.
+
+Требования:
+
+Функция принимает возраст (age) и наличие прав (hasLicense, булево значение).
+
+Используй логические операторы (&&, ||) и тернарный оператор для определения результата.
+
+Функция должна возвращать строку: "Доступ разрешен" или "Доступ запрещен".
+
+Условие: возраст должен быть 18 лет или больше, и права должны быть (hasLicense === true).
+
+JavaScript
+
+// Пример использования:
+console.log(checkAccess(20, true));  // Ожидаемый результат: "Доступ разрешен"
+console.log(checkAccess(17, true));  // Ожидаемый результат: "Доступ запрещен"
+console.log(checkAccess(25, false)); // Ожидаемый результат: "Доступ запрещен"
+*/
+
+// const checkAccess = (age, hasLicense) => age >= 18 && hasLicense ? 'Доступ разрешен' : 'Доступ запрещен'
+
+// console.log(checkAccess(20, true));  
+// console.log(checkAccess(17, true));  
+// console.log(checkAccess(25, false));
+
+//////////////////////////////////////////////////////////////////////
+
+/* Задача 25
+
+Объединение объектов
+Напиши функцию mergeUsers(user, defaults), которая объединяет два объекта.
+
+Требования:
+
+Функция принимает два объекта: user (с основными данными) и defaults (со значениями по умолчанию).
+
+Нужно создать новый объект, который будет содержать все свойства из defaults, перезаписанные свойствами из user, если они совпадают.
+
+Используй оператор ... (spread) для копирования и объединения.
+*/
+
+const mergeUsers = (user, defaults) => {
+    const newObject = {...user, ...defaults}
+    return newObject
 }
 
-console.log(createReport(salesData))
+const mainUser = {
+  name: "Alice",
+  email: "alice@example.com"
+};
+
+const defaultSettings = {
+  theme: "light",
+  email: "default@example.com", // это свойство должно быть перезаписано
+  notifications: true
+};
+
+const mergedUser = mergeUsers(mainUser, defaultSettings);
+console.log(mergedUser);
