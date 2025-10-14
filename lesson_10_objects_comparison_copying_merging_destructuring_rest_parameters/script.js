@@ -33,11 +33,6 @@
 //     const keys1 = Object.keys(object1) // этот метод собирает ключи объекта в массив
 //     const keys2 = Object.keys(object2)
 
-//     console.log('keys1:', keys1)
-//     console.log('keys2:', keys2)
-
-//     console.log('Длина keys1:', keys1.length)
-//     console.log('Длина keys2:', keys2.length)
 
 //     if(keys1.length !== keys2.length) {
 //         return false
