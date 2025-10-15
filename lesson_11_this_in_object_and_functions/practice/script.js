@@ -407,3 +407,315 @@ challenger.nestedMethod();
 Объяснение: потому что в третьем вызове создаёться новая функция без указания контекста, так что контекст этой функции будет снова объект браузера, что выведет пустую строку при обращении к его свойству name
 Прогноз: 4. Nested arrow fn: My name is  через 100 милисекунд и My name is Challenger Object через 200 милисекунд Объяснение: потому что первая функция этого объекта объявленна в function deсlaration, значит её контекст зависит от того,что слева от точки при вызове,и ищет там объект, но не находит, потому что он там не указан,и this снова возвращает значение глобального window - пустую строку. Вторая функция объявленна стрелочным методом, что скрывает для неё внешний контекст, и она видит "родительский" её метода, то есть, через одну вложенность наверх, а это как раз объект challenger в котором лежит нужный нам name, и this указывает на него.
 */
+
+//////////////////////////////////////////
+
+/* Задача 11
+Объект "Корзина покупок" на объектах
+Создай объект shoppingCart со следующей структурой и методами:
+
+Свойство items:
+
+Это должен быть пустой объект {}. Он будет хранить добавленные товары.
+
+Структура хранения будет такой: {'НазваниеТовара': { price: ..., quantity: ... }}.
+
+Метод addProduct(product):
+
+Принимает один аргумент — объект товара, например { name: 'Банан', price: 30 }.
+
+Логика:
+
+Проверить, есть ли уже в this.items ключ с названием product.name.
+
+Если есть — просто увеличить quantity у существующего товара на 1.
+
+Если нет — добавить новый ключ product.name в this.items, а в качестве значения записать объект { price: product.price, quantity: 1 }.
+
+Метод removeProduct(productName):
+
+Принимает название товара (строку).
+
+Находит товар в объекте this.items по его ключу (productName) и удаляет его. (Вспоминай, как удалять свойства из объекта).
+
+Метод calculateTotal():
+
+Должен перебрать все свойства объекта this.items (вспомни цикл for...in).
+
+Для каждого товара внутри this.items вычислить его стоимость (price * quantity).
+
+Сложить все стоимости и вернуть итоговую сумму.
+
+Метод getCartInfo():
+
+Возвращает строку с информацией о состоянии корзины. Например: "В корзине 2 вида товаров на сумму 350".
+
+Этот метод для подсчета суммы должен вызывать this.calculateTotal().
+
+Чтобы посчитать количество видов товаров, можно получить количество ключей в объекте this.items. Тут тебе может пригодиться Object.keys(this.items).length, это стандартный способ узнать, сколько свойств в объекте.
+*/
+
+// const shopppingCart = {
+//     items: {},
+//     addProduct(product) {
+//         if (product.name in this.items) {
+//             this.items[product.name].quantity++
+//         } else {
+//             this.items[product.name] = {price: product.price, quantity: 1,}
+//         }
+//     },
+//     removeProduct(productName){
+//     delete this.items[productName]
+//     },
+//     calculateTotal() {
+//         let productSum = 0
+//         let totalSum = 0
+
+//         for(let productKey in this.items) {
+//             const currentProduct = this.items[productKey]
+//             productSum = currentProduct.price * currentProduct.quantity
+//             totalSum += productSum
+//         }
+
+//         return totalSum
+//     },
+//     getCartInfo() {
+//         let count = Object.keys(this.items).length
+//         return `В корзине ${count} вида продукта на сумму ${this.calculateTotal()}`
+//     }
+// }
+
+// // Твой идеальный объект shoppingCart здесь...
+
+// console.log('--- Начинаем покупки ---')
+// shopppingCart.addProduct({ name: 'Молоко', price: 35, })
+// shopppingCart.addProduct({ name: 'Хлеб', price: 20, })
+// shopppingCart.addProduct({ name: 'Молоко', }) // Добавляем еще одно молоко
+// console.log(shopppingCart.items)
+// // Ожидаем: { 'Молоко': { price: 35, quantity: 2 }, 'Хлеб': { price: 20, quantity: 1 } }
+
+// console.log(shopppingCart.getCartInfo())
+// // Ожидаем: "В корзине 2 вида продукта на сумму 90"
+
+// console.log('\n--- Удаляем хлеб ---')
+// shopppingCart.removeProduct('Хлеб')
+// console.log(shopppingCart.items)
+// // Ожидаем: { 'Молоко': { price: 35, quantity: 2 } }
+
+// console.log(shopppingCart.getCartInfo())
+// // Ожидаем: "В корзине 1 вида продукта на сумму 70"
+
+//////////////////////////////////////////
+
+/* Задача 12
+
+Объект "Телефонная книга"
+
+Нужно создать объект phoneBook, который будет хранить контакты и позволит ими управлять.
+
+Вот его структура и методы:
+
+Свойство contacts
+
+Это пустой объект {}, который будет хранить все контакты.
+
+Структура хранения: {'Имя контакта': { phone: '...', email: '...' }}.
+
+Метод addContact(name, phone, email)
+
+Принимает три строковых аргумента: имя, телефон и email.
+
+Логика: Проверяет, есть ли уже контакт с таким name в this.contacts.
+
+Если есть, выводит в консоль сообщение вроде "Контакт 'Иван' уже существует." и ничего не делает.
+
+Если нет, добавляет новый контакт в this.contacts в правильном формате.
+
+Метод findContact(name)
+
+Принимает имя контакта для поиска.
+
+Логика:
+
+Если контакт с таким name найден, возвращает строку с его данными, например: "Имя: Иван, Телефон: 123-45-67, Email: ivan@test.com".
+
+Если контакт не найден, возвращает строку "Контакт не найден.".
+
+Метод updateContact(name, newInfo)
+
+Принимает имя контакта и объект newInfo с новыми данными.
+
+Объект newInfo может содержать только одно поле ({ email: 'new@email.com' }) или несколько ({ phone: '555-55-55', email: 'ivan.new@email.com' }).
+
+Логика:
+
+Находит существующий контакт по name.
+
+Если контакт найден, он обновляет только те поля, которые есть в newInfo, не затирая остальные. (Вспоминай про объединение объектов).
+
+Если контакт не найден, ничего не делает.
+
+Метод removeContact(name)
+
+Принимает имя и удаляет контакт из this.contacts.
+*/
+
+// const phoneBook = {
+//     contacts: {},
+//     addContact(name, phone, email) {
+//         if (name in this.contacts) {
+//             console.log(`Контакт '${name}' уже существует.`)
+//         } else {
+//             this.contacts[name] = {phone, email}
+//         }
+//     },
+//     findContact(name) {
+//         if (name in this.contacts) {
+//             const contact = this.contacts[name]
+//             return `Имя: ${name}, Телефон: ${contact.phone}, Email: ${contact.email}`
+//         } else return 'Контакт не найден.'
+//     },
+//     updateContact(name, newInfo) {
+//         if(name in this.contacts) {
+//             this.contacts[name] = {...this.contacts[name], ...newInfo}
+//             console.log(`Контакт '${name}' успешно обновлен.`)
+//         } else {
+//             console.log(`Ошибка: Невозможно обновить. Контакт '${name}' не найден.`)
+//         }
+//     },
+//     removeContact(name) {
+//         if (name in this.contacts) {
+//             delete this.contacts[name]
+//             console.log(`Контакт '${name}' удален.`)
+//         } else {
+//             console.log(`Ошибка: Невозможно удалить. Контакт '${name}' не найден.`)           
+//         }
+//     } 
+// }
+
+// // console.log('--- Этап 1: Добавление ---')
+// phoneBook.addContact('Иван', '111-11-11', 'ivan@mail.com')
+// phoneBook.addContact('Мария', '222-22-22', 'maria@mail.com')
+// phoneBook.addContact('Петр', '333-33-33', 'petr@mail.com')
+
+// // --- Попытка добавить дубликат ---
+// // phoneBook.addContact('Иван', '000-00-00', 'ivan.new@mail.com')
+
+// console.log('\nТекущее состояние книги:', phoneBook.contacts)
+
+
+// // // --- 2. Поиск контактов ---
+// // console.log('\n--- Этап 2: Поиск ---')
+// // console.log(phoneBook.findContact('Мария'))
+// // console.log(phoneBook.findContact('Алексей'))
+
+
+// // // --- 3. Обновление контакта ---
+// console.log('\n--- Этап 3: Обновление ---')
+// phoneBook.updateContact('Иван', { email: 'ivan.work@mail.com' })
+// phoneBook.updateContact('Петр', { phone: '777-77-77', email: 'petr.boss@mail.com' })
+// phoneBook.updateContact('Алексей', { phone: '999-99-99' }) // Попытка обновить несуществующий контакт
+
+// console.log('\nСостояние после обновления:', phoneBook.contacts)
+
+
+// // --- 4. Удаление контакта ---
+// console.log('\n--- Этап 4: Удаление ---')
+// phoneBook.removeContact('Мария')
+// phoneBook.removeContact('Мария') // Попытка удалить еще раз
+
+// console.log('\nФинальное состояние книги:', phoneBook.contacts)
+
+//////////////////////////////////////////
+
+/* Задача 13
+
+Объект "Настройки пользователя"
+
+Нужно создать объект userSettings, который будет управлять настройками пользователя и позволит сбрасывать их к значениям по умолчанию.
+
+Вот его структура и методы:
+
+Свойство defaults
+
+Это объект, который хранит настройки по умолчанию. Он не должен меняться.
+
+Задай ему такие значения: { theme: 'light', notifications: true, language: 'en', }
+
+Свойство current
+
+Это объект, который хранит текущие настройки пользователя.
+
+Важно: Изначально он должен быть точной копией объекта defaults. (Вспоминай, как скопировать объект, чтобы они не были связаны).
+
+Метод updateSetting(key, value)
+
+Принимает ключ (строку, например, 'theme') и новое значение (например, 'dark').
+
+Обновляет значение для указанного ключа в объекте this.current.
+
+Метод getSetting(key)
+
+Принимает ключ (строку).
+
+Возвращает значение этого ключа из this.current.
+
+Метод resetToDefaults()
+
+Вот и небольшое усложнение. Этот метод не принимает аргументов.
+
+Он должен сбросить все текущие настройки пользователя (this.current) обратно к значениям по умолчанию, которые хранятся в this.defaults.
+
+На что обратить внимание:
+
+Копирование объектов: Ключевой момент в начале — правильно скопировать defaults в current, чтобы при изменении current не менялся defaults.
+
+Сброс настроек: Подумай, как в resetToDefaults можно снова скопировать все значения из одного объекта в другой, полностью заменяя старые.
+*/
+
+const userSettings =  {
+    defaults: {
+        theme: 'light', 
+        notifications: true, 
+        language: 'en',
+    },
+    current: {
+        theme: 'light', 
+        notifications: true, 
+        language: 'en',
+    },
+    updateSetting(key, value) {
+        this.current[key] = value
+    },
+    getSetting(key) {
+        return this.current[key]
+    },
+    resetToDefaults() {
+        this.current = {...this.defaults}
+    }
+}
+
+console.log('--- Начальные настройки ---')
+console.log('Текущая тема:', userSettings.getSetting('theme')) // 'light'
+console.log('Текущие настройки:', userSettings.current)
+console.log('Настройки по умолчанию:', userSettings.defaults)
+
+
+// --- 2. Обновляем настройки ---
+console.log('\n--- Обновляем тему и выключаем уведомления ---')
+userSettings.updateSetting('theme', 'dark')
+userSettings.updateSetting('notifications', false)
+console.log('Новая тема:', userSettings.getSetting('theme')) // 'dark'
+console.log('Текущие настройки после изменений:', userSettings.current)
+
+
+// --- 3. Проверяем, что настройки по умолчанию не изменились ---
+console.log('\n--- Проверяем defaults ---')
+console.log('Настройки по умолчанию остались прежними:', userSettings.defaults) // Должны быть light, true, en
+
+
+// --- 4. Сбрасываем настройки ---
+console.log('\n--- Сбрасываем к значениям по умолчанию ---')
+userSettings.resetToDefaults()
+console.log('Тема после сброса:', userSettings.getSetting('theme')) // 'light'
+console.log('Текущие настройки после сброса:', userSettings.current)
