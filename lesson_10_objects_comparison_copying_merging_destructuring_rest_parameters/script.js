@@ -64,58 +64,58 @@
 
 // для глубокого надо применить метод рекурсии (когда функция вызывает саму себя):
 
-// const obj1 = {
-//     name: 'Никита',
-//     age: 28,
-//     address: {
-//         city: 'Odessa',
-//         zipcode: 123456,
-//     },
-// }
+const obj1 = {
+    name: 'Никита',
+    age: 28,
+    address: {
+        city: 'Odessa',
+        zipcode: 123456,
+    },
+}
 
-// const obj2 = {
-//     name: 'Никита',
-//     age: 28,
-//     address: {
-//         city: 'Odessa',
-//         zipcode: 123456,
-//     },
-// }
+const obj2 = {
+    name: 'Никита',
+    age: 28,
+    address: {
+        city: 'Odessa',
+        zipcode: 123456,
+    },
+}
 
-// const areObjectsEqual = (object1, object2) => {
-//     const keys1 = Object.keys(object1) 
-//     const keys2 = Object.keys(object2)
+const areObjectsEqual = (object1, object2) => {
+    const keys1 = Object.keys(object1) 
+    const keys2 = Object.keys(object2)
 
-//     console.log('keys1:', keys1)
-//     console.log('keys2:', keys2)
+    console.log('keys1:', keys1)
+    console.log('keys2:', keys2)
 
-//     console.log('Длина keys1:', keys1.length)
-//     console.log('Длина keys2:', keys2.length)
+    console.log('Длина keys1:', keys1.length)
+    console.log('Длина keys2:', keys2.length)
 
-//     if(keys1.length !== keys2.length) {
-//         return false
-//     }
+    if(keys1.length !== keys2.length) {
+        return false
+    }
 
-//     for (const key in object1) {
-//         const value1 = object1[key]
-//         const value2 = object2[key]
-//         const areValuesObjects = 
-//             typeof value1 == 'object' && typeof value2 === 'object'
+    for (const key in object1) {
+        const value1 = object1[key]
+        const value2 = object2[key]
+        const areValuesObjects = 
+            typeof value1 == 'object' && typeof value2 === 'object'
 
-//         if (areValuesObjects) {
-//             return areObjectsEqual(value1, value2)
-//         }
-//         if (value1 !== value2) {
-//             return false
-//         }
-//     }
+        if (areValuesObjects) {
+            return areObjectsEqual(value1, value2)
+        }
+        if (value1 !== value2) {
+            return false
+        }
+    }
 
-//     return true
-// }
+    return true
+}
 
-// console.log(
-//     'Равны ли obj1 и obj2:', areObjectsEqual(obj1, obj2)
-// )   // тут есть бага, чуть позже вернуться и решить
+console.log(
+    'Равны ли obj1 и obj2:', areObjectsEqual(obj1, obj2)
+)   // тут есть бага, чуть позже вернуться и решить
 
 ///////////////////////////////////////////////////////////////////
 
