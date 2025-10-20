@@ -158,24 +158,89 @@ JavaScript
 }
 */
 
-const apiLogs = [
-  { type: 'error', message: 'User login failed' },
-  { type: 'info', message: 'User viewed page' },
-  { type: 'warning', message: 'API response slow' },
-  { type: 'error', message: 'Payment failed' },
-  { type: 'info', message: 'User logged out' },
-  { type: 'error', message: 'Resource not found' },
+// const apiLogs = [
+//   { type: 'error', message: 'User login failed' },
+//   { type: 'info', message: 'User viewed page' },
+//   { type: 'warning', message: 'API response slow' },
+//   { type: 'error', message: 'Payment failed' },
+//   { type: 'info', message: 'User logged out' },
+//   { type: 'error', message: 'Resource not found' },
+// ]
+
+// const groupLogsByType = (logs) => {
+//     const result = {}
+//     for (const log of logs) {
+//         const logType = log.type
+//         if (!Object.hasOwn(result, logType)) {
+//             result[logType] = []
+//         }
+        
+//             result[logType].push(log)
+        
+//     } return result
+// }
+
+// console.log(groupLogsByType(apiLogs))
+
+//////////////////////////////////////////////////////////////////////////
+
+/* Задача 5
+
+Поиск пользователя по ID
+
+Представь, что у тебя есть массив объектов. Каждый объект — это пользователь.
+
+JavaScript
+
+const users = [
+  { id: 101, name: 'Alex', email: 'alex@email.com' },
+  { id: 102, name: 'Jane', email: 'jane@email.com' },
+  { id: 103, name: 'Chris', email: 'chris@email.com' },
+  { id: 104, name: 'Eva', email: 'eva@email.com' },
+]
+Напиши функцию findUserById(usersArray, idToFind), которая принимает два аргумента:
+
+Массив пользователей (usersArray).
+
+ID пользователя, которого нужно найти (idToFind).
+
+Правила работы функции:
+
+Она должна перебрать массив usersArray.
+
+Как только она находит объект, у которого id совпадает с idToFind, она должна немедленно вернуть этот объект.
+
+Если функция перебрала весь массив, но так и не нашла пользователя с нужным ID, она должна вернуть null.
+
+Примеры вызова:
+
+JavaScript
+
+findUserById(users, 103) 
+// Ожидаемый результат: { id: 103, name: 'Chris', email: 'chris@email.com' }
+
+findUserById(users, 999) 
+// Ожидаемый результат: null
+*/
+
+const users = [
+  { id: 101, name: 'Alex', email: 'alex@email.com' },
+  { id: 102, name: 'Jane', email: 'jane@email.com' },
+  { id: 103, name: 'Chris', email: 'chris@email.com' },
+  { id: 104, name: 'Eva', email: 'eva@email.com' },
 ]
 
-const groupLogsByType = (logs) => {
-    const result = {}
+const findUserById = (usersArray, idToFind) => {
+    for (const user of usersArray) {
+        if (user.id === idToFind) {
+        return user
+        }
+
+    }
+    return null
 }
 
-
-
-
-
-
+console.log(findUserById(users, 104))
 
 
 
