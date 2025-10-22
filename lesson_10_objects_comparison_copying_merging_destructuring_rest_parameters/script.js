@@ -86,12 +86,6 @@ const areObjectsEqual = (object1, object2) => {
     const keys1 = Object.keys(object1) 
     const keys2 = Object.keys(object2)
 
-    console.log('keys1:', keys1)
-    console.log('keys2:', keys2)
-
-    console.log('Длина keys1:', keys1.length)
-    console.log('Длина keys2:', keys2.length)
-
     if(keys1.length !== keys2.length) {
         return false
     }
@@ -100,12 +94,14 @@ const areObjectsEqual = (object1, object2) => {
         const value1 = object1[key]
         const value2 = object2[key]
         const areValuesObjects = 
-            typeof value1 == 'object' && typeof value2 === 'object'
+            value1 !== null && typeof value1 === 'object' && value2 !== null && typeof value2 === 'object'
 
         if (areValuesObjects) {
-            return areObjectsEqual(value1, value2)
-        }
-        if (value1 !== value2) {
+            const nestedObjectsAreEqual = areObjectsEqual(value1, value2)
+            if (nestedObjectsAreEqual === false) {
+                return false
+            }
+        } else if (value1 !== value2) {
             return false
         }
     }

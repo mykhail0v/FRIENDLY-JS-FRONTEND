@@ -55,21 +55,7 @@
 
 // НЕОБЫЧНОЕ ПОВЕДЕНИЕ THIS В РАЗНЫХ УСЛОВИЯХ
 
-// const user1 = { name: 'Миша'}
-// const user2 = { name: 'Вася'}
-
-// function logInfo() {
-//     console.log('this:', this)
-//     console.log('this.name:', this.name)
-// }
-
-// logInfo()
-
-// user1.logName = logInfo
-// user2.logName = logInfo
-
-// user1.logName()
-// user2.logName()
+// const logName()
 
 ////////////////////////////////////////////////////////
 
