@@ -23,13 +23,13 @@
 
 // forEach ПЕРЕБОР МАССИВА
 
-// const letters = ['А', 'Б', 'В', 'Г', 'Д', 'Е']
+const letters = ['А', 'Б', 'В', 'Г', 'Д', 'Е']
 
 // for (let i = 0; i < letters.length; i++) {
 //     console.log(letters[i])
 // } 
 
-// // то же:
+// то же:
 
 // letters.forEach((letter, index, array) => { // все эти сущности опциональны, необязательно использовать их все сразу
 //     console.log('letter:', letter)
@@ -81,15 +81,15 @@
 //     },
 // ]
 
-// // console.log(
-// //     users.findIndex((user) => {
-// //         if (user.name === 'Алексей') {
-// //             return true
-// //         }
-// //     })
-// // ) // 1
+// console.log(
+//     users.findIndex((user) => {
+//         if (user.name === 'Алексей') {
+//             return true
+//         }
+//     })
+// ) // 1
 
-// // можно сократить:
+// можно сократить:
 
 // console.log(
 //     users.findIndex((user) => user.name === 'Алексей')
@@ -98,10 +98,10 @@
 // // множно и с деструктуризацией:
 
 // console.log(
-//     users.findIndex(({name}) => name === 'Алексей') // такой подход ухудшает читаемость, лучше использовать предидущий способ
+//     users.findIndex(({name}) => name === 'Алексей') // такой подход ухудшает читаемость, лучше использовать предыдущий способ
 // )
 
-// // findLastIndex - ищет с конца
+// findLastIndex - ищет с конца
 
 ///////////////////////////////////////////////////////////////////
 
@@ -199,27 +199,27 @@
 //     {
 //         name: 'Александр',
 //         age: 28,
-//         city: 'Moscow'
+//         city: 'Kiev'
 //     },
 //     {
 //         name: 'Алексей',
 //         age: 14,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //     {
 //         name: 'Никита', 
 //         age: 24,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //         {
 //         name: 'Никита',
 //         age: 62,
-//         city: 'Moscow',
+//         city: 'Kiev',
 //     },
 // ]
 
 // const filteredUsers = users.filter(({city, age}) => { // здесь деструктуризация полей будет не лишней
-//     return city === 'Moscow' && age < 45
+//     return city === 'Kiev' && age < 45
 // })
 
 // console.log(filteredUsers)
@@ -234,22 +234,22 @@
 //     {
 //         name: 'Александр',
 //         age: 28,
-//         city: 'Moscow'
+//         city: 'Kiev'
 //     },
 //     {
 //         name: 'Алексей',
 //         age: 14,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //     {
 //         name: 'Никита', 
 //         age: 24,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //         {
 //         name: 'Никита',
 //         age: 62,
-//         city: 'Moscow',
+//         city: 'Kiev',
 //     },
 // ]
 
@@ -270,22 +270,22 @@
 //     {
 //         name: 'Александр',
 //         age: 28,
-//         city: 'Moscow'
+//         city: 'Kiev'
 //     },
 //     {
 //         name: 'Алексей',
 //         age: 14,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //     {
 //         name: 'Никита', 
 //         age: 24,
-//         city: 'Odessa',
+//         city: 'Odesa',
 //     },
 //         {
 //         name: 'Никита',
 //         age: 62,
-//         city: 'Moscow',
+//         city: 'Kiev',
 //     },
 // ]
 
@@ -328,35 +328,35 @@
 
 // reverse
 
-// const users = [
-//     {
-//         name: 'Александр',
-//         age: 28,
-//         city: 'Moscow'
-//     },
-//     {
-//         name: 'Алексей',
-//         age: 14,
-//         city: 'Odessa',
-//     },
-//     {
-//         name: 'Никита', 
-//         age: 24,
-//         city: 'Odessa',
-//     },
-//         {
-//         name: 'Никита',
-//         age: 62,
-//         city: 'Moscow',
-//     },
-// ]
+const users = [
+    {
+        name: 'Александр',
+        age: 28,
+        city: 'Kiev'
+    },
+    {
+        name: 'Алексей',
+        age: 14,
+        city: 'Odesa',
+    },
+    {
+        name: 'Никита', 
+        age: 24,
+        city: 'Odesa',
+    },
+        {
+        name: 'Никита',
+        age: 62,
+        city: 'Kiev',
+    },
+]
 
-// // const reversedUsers = users.reverse() // метод reverse МУТИРУЕТ исходную сущность в отличие от всех вышеупомянутых методов
+// const reversedUsers = users.reverse() // метод reverse МУТИРУЕТ исходную сущность в отличие от всех вышеупомянутых методов
 
-// // console.log(
-// //     'Maссив в обратном порядке:',
-// //     reversedUsers
-// // )
+// console.log(
+//     'Maссив в обратном порядке:',
+//     reversedUsers
+// )
 
 // /////////////////
 
@@ -373,26 +373,25 @@
 
 // sort
 
-const names = ['Василий', 'Александр', 'Максим', 'Андрей'] // метод sort МУТИРУЕТ исходную сущность
+// const names = ['Василий', 'Александр', 'Максим', 'Андрей'] // метод sort МУТИРУЕТ исходную сущность
 
-const sortedNames = [...names].sort() // копируем
+// const sortedNames = [...names].sort() // копируем
 
-console.log(
-    'Отсортированные имена:',
-    sortedNames
-) // в алфавитном порядке
+// console.log(
+//     'Отсортированные имена:',
+//     sortedNames
+// ) // в алфавитном порядке
 
-// с числами сложнее:
+// // с числами сложнее:
 
-const numbers = [8, 4, 500]
+// const numbers = [8, 4, 500]
 
-const sortedNumbers = [...numbers].sort((a, b) => a - b)
+// const sortedNumbers = [...numbers].sort((a, b) => a - b) // comparator - функция сравнения
 
-console.log(
-    'Отсортированные числа:',
-    sortedNumbers
-)
-
+// console.log(
+//     'Отсортированные числа:',
+//     sortedNumbers
+// )
 
 
 
