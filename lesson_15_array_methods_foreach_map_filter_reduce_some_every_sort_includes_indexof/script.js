@@ -393,6 +393,13 @@ const users = [
 //     sortedNumbers
 // )
 
+// --- ТЕОРИЯ: .flat() ---
+// .flat() "расплющивает" массив на один уровень
+const nestedArray = [1, 2, [3, 4], [5, [6, 7]]]
+// console.log(nestedArray.flat()) // [1, 2, 3, 4, 5, [6, 7]]
+// Заметь, [6, 7] остался вложенным! .flat() "открывает" только 1 уровень.
+// console.log(nestedArray.flat(2)) // [1, 2, 3, 4, 5, 6, 7] (открыть 2 уровня)
+// console.log(nestedArray.flat(Infinity)) // "Открыть" всё до конца
 
 
 
