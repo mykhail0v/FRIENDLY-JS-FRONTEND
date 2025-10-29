@@ -112,20 +112,20 @@
 //   { id: 9, name: 'Комикс', category: 'Books', price: 15, inStock: false, }, // не в наличии
 // ]
 
-// // --- ТВОЯ ЗАДАЧА ---
-// // Рассчитать ОБЩУЮ СУММУ всех товаров, которые
-// // есть В НАЛИЧИИ, сгруппированную ПО КАТЕГОРИЯМ.
-// //
-// // Это очень частая задача для всяких "дашбордов" (админок),
-// // чтобы показать, товаров какой категории у нас на складе больше всего.
+// --- ТВОЯ ЗАДАЧА ---
+// Рассчитать ОБЩУЮ СУММУ всех товаров, которые
+// есть В НАЛИЧИИ, сгруппированную ПО КАТЕГОРИЯМ.
+//
+// Это очень частая задача для всяких "дашбордов" (админок),
+// чтобы показать, товаров какой категории у нас на складе больше всего.
 
-// // Используй .reduce().
-// //
-// // Совет Сеньора: 💡
-// // 1. Аккумулятор (acc) будет объектом: {}
-// // 2. Тебе нужно проверять `item.inStock` (можно сделать `if`... или... ?)
-// // 3. Тебе нужно проверять, есть ли `item.category` уже в `acc`.
-// //    (Подсказка: `if (acc[item.category]) { ... } else { ... }`)
+// Используй .reduce().
+//
+// Совет Сеньора: 💡
+// 1. Аккумулятор (acc) будет объектом: {}
+// 2. Тебе нужно проверять `item.inStock` (можно сделать `if`... или... ?)
+// 3. Тебе нужно проверять, есть ли `item.category` уже в `acc`.
+//    (Подсказка: `if (acc[item.category]) { ... } else { ... }`)
 
 // const categoryValue = apiResponse.reduce((acc, item) => {
 //     const key = item.category
@@ -670,36 +670,471 @@
 
 // pro подход:
 
-const transactions = [
-  { id: 101, type: 'income', category: 'Salary', amount: 3000 },
-  { id: 102, type: 'expense', category: 'Food', amount: 250 },
-  { id: 103, type: 'expense', category: 'Rent', amount: 1200 },
-  { id: 104, type: 'income', category: 'Freelance', amount: 500 },
-  { id: 105, type: 'expense', category: 'Food', amount: 150 },
-  { id: 106, type: 'expense', category: 'Utilities', amount: 200 },
+// const transactions = [
+//   { id: 101, type: 'income', category: 'Salary', amount: 3000 },
+//   { id: 102, type: 'expense', category: 'Food', amount: 250 },
+//   { id: 103, type: 'expense', category: 'Rent', amount: 1200 },
+//   { id: 104, type: 'income', category: 'Freelance', amount: 500 },
+//   { id: 105, type: 'expense', category: 'Food', amount: 150 },
+//   { id: 106, type: 'expense', category: 'Utilities', amount: 200 },
+// ]
+
+// const initialReport = {
+//   totalBalance: 0,
+//   totalExpenses: 0,
+// }
+
+// const proReport = transactions.reduce((report, transaction) => {
+//     if (transaction.type === 'income') {
+//         return{
+//             ...report,
+//             totalBalance: report.totalBalance + transaction.amount,
+//         }
+//     }
+//       if (transaction.type === 'expense') {
+//     return {
+//       ...report,
+//       totalBalance: report.totalBalance - transaction.amount,
+//       totalExpenses: report.totalExpenses + transaction.amount,
+//     }
+//   }
+
+//   return report
+// }, initialReport)
+
+// console.log('Pro Отчет:', proReport)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 16
+
+// --- ДАННЫЕ С "API" (Проекты и их задачи) ---
+
+// У нас есть массив проектов.
+// У каждого проекта есть вложенный массив задач.
+// const projects = [
+//   {
+//     projectId: 'P-1',
+//     name: 'Релиз "Omega"',
+//     tasks: [
+//       { id: 't-101', title: 'Спроектировать API', status: 'completed', priority: 'High' },
+//       { id: 't-102', title: 'Написать тесты', status: 'in-progress', priority: 'Medium' },
+//       { id: 't-103', title: 'Развернуть на Staging', status: 'in-progress', priority: 'High' },
+//     ],
+//   },
+//   {
+//     projectId: 'P-2',
+//     name: 'Маркетинговая кампания',
+//     tasks: [
+//       { id: 't-201', title: 'Подготовить баннеры', status: 'completed', priority: 'Medium' },
+//       { id: 't-202', title: 'Запустить A/B тест', status: 'new', priority: 'High' },
+//     ],
+//   },
+//   {
+//     projectId: 'P-3',
+//     name: 'Внутренний аудит',
+//     tasks: [
+//       { id: 't-301', title: 'Собрать метрики', status: 'in-progress', priority: 'High' },
+//       { id: 't-302', title: 'Подготовить отчет', status: 'new', priority: 'Low' },
+//     ],
+//   },
+// ]
+
+// // --- ЗАДАЧА (Без подсказок) ---
+// //
+// // Получи **один "плоский" массив** (string[]), содержащий
+// // **только `title`** тех задач, которые:
+// // 1. **НЕ** `completed`
+// // 2. И имеют `priority` **'High'**
+// //
+// // --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// // [ 'Развернуть на Staging', 'Запустить A/B тест', 'Собрать метрики' ]
+
+// const highPriorityTasks = projects
+//                                 .flatMap(({tasks}) => tasks)
+//                                 .filter(({status, priority}) => status !== 'completed' && priority === 'High')
+//                                 .map(({title}) => title)
+
+// console.log(highPriorityTasks)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 17
+
+// --- ДАННЫЕ С "API" (Корзина покупок) ---
+
+// У нас есть "плоский" массив товаров в корзине.
+// У каждого есть цена, кол-во и флаг "налогооблагаемый".
+// const cart = [
+//   {
+//     id: 1,
+//     name: 'Ноутбук',
+//     price: 1500,
+//     quantity: 1,
+//     taxable: true, // Облагается налогом (5%)
+//   },
+//   {
+//     id: 2,
+//     name: 'Подарочная карта',
+//     price: 50,
+//     quantity: 2,
+//     taxable: false, // НЕ облагается налогом
+//   },
+//   {
+//     id: 3,
+//     name: 'Наушники',
+//     price: 200,
+//     quantity: 1,
+//     taxable: true, // Облагается налогом (5%)
+//   },
+//   {
+//     id: 4,
+//     name: 'ПО (Подписка)',
+//     price: 25,
+//     quantity: 4,
+//     taxable: false, // НЕ облагается налогом
+//   },
+// ]
+
+// // --- ЗАДАЧА (Без подсказок) ---
+// //
+// // "Сверни" массив 'cart' в **один объект-отчет** 'cartSummary'.
+// // Налог (Tax) составляет 5% (0.05) и берется *только*
+// // с 'taxable: true' товаров.
+// //
+// // --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// // {
+// //   totalPrice: 1900, // (1500*1) + (50*2) + (200*1) + (25*4) = 1500 + 100 + 200 + 100
+// //   totalTax: 85,     // (1500*1)*0.05 + (200*1)*0.05 = 75 + 10
+// // }
+
+// const initialReport = {
+//     totalPrice: 0,
+//     totalTax: 0,
+// }
+
+// // const reportByCart = cart
+// //                         .reduce((report, product) => {
+// //                                 if (product.taxable) {
+// //                                     return {
+// //                                         ...report,
+// //                                         totalTax: report.totalTax + product.price * product.quantity * 0.05,
+// //                                         totalPrice: report.totalPrice + product.price * product.quantity
+
+// //                                     }
+// //                                 } else
+// //                                 return {
+// //                                     ...report,
+// //                                     totalPrice: report.totalPrice + product.price * product.quantity
+// //                                 }
+// //                         }, initialReport)
+
+// // console.log(reportByCart)
+
+// // --- 🤓 ОПЫТ СЕНЬОРА: "PRO" РЕФАКТОРИНГ (DRY) ---
+// // Принцип "Don't Repeat Yourself" (Не повторяйся)
+// // Код выше - идеален. Но его можно сделать "суше",
+// // убрав if/else и повторение 'totalPrice'
+
+// const proReport = cart.reduce((report, product) => {
+//     const itemTotal = product.price * product.quantity
+//     const itemTax = product.taxable ? itemTotal * 0.05 : 0
+//     return {
+//         totalPrice: report.totalPrice + itemTotal,
+//         totalTax: report.totalTax + itemTax
+//     }
+// }, initialReport)
+
+// console.log(proReport)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 18
+
+// --- ДАННЫЕ (Массив авторов) ---
+// const authors = [
+//   {
+//     name: 'Артур Конан Дойл',
+//     books: [
+//       { title: 'Этюд в багровых тонах', year: 1887 },
+//       { title: 'Собака Баскервилей', year: 1901 },
+//     ],
+//   },
+//   {
+//     name: 'Джордж Оруэлл',
+//     books: [
+//       { title: '1984', year: 1949 },
+//       { title: 'Скотный двор', year: 1945 },
+//     ],
+//   },
+//   {
+//     name: 'Айзек Азимов',
+//     books: [
+//       { title: 'Основание', year: 1951 },
+//       { title: 'Я, Робот', year: 1950 },
+//     ],
+//   },
+//   {
+//     name: 'Виктор Пелевин',
+//     books: [
+//       { title: 'Generation П', year: 1999 },
+//       { title: 'S.N.U.F.F.', year: 2011 },
+//       { title: 'KGBT+', year: 2022 },
+//     ],
+//   },
+// ]
+
+// // --- ЗАДАЧА ---
+// //
+// // Получи "плоский" массив (string[]), содержащий
+// // **только `title`** тех книг, которые были опубликованы
+// // в 21-м веке (т.е. `year > 2000`).
+// //
+// // --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// // [
+// //   'S.N.U.F.F.',
+// //   'KGBT+',
+// // ]
+
+// const books20thCentury = authors
+//                             .flatMap(({books}) => books)
+//                             .filter(({year}) => year > 2000)
+//                             .map(({title}) => title)
+
+// console.log(books20thCentury)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 18
+
+// --- ДАННЫЕ (Массив отправок на проверку) ---
+// const submissions = [
+//   { student: 'Алиса', score: 92, status: 'graded' },
+//   { student: 'Борис', score: 78, status: 'graded' },
+//   { student: 'Вера', score: 85, status: 'pending' },
+//   { student: 'Григорий', score: 100, status: 'graded' },
+//   { student: 'Дарья', score: 0, status: 'pending' },
+//   { student: 'Евгений', score: 95, status: 'graded' },
+// ]
+
+// --- ЗАДАЧА ---
+//
+// "Сверни" массив 'submissions' в **один объект-отчет**.
+// Отчет должен содержать 3 метрики:
+// 1. `gradedCount`: Общее кол-во 'graded' работ.
+// 2. `pendingCount`: Общее кол-во 'pending' работ.
+// 3. `totalScoreGraded`: Сумма *только* 'graded' работ.
+//
+// --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// {
+//   gradedCount: 4,
+//   pendingCount: 2,
+//   totalScoreGraded: 365, // 92 + 78 + 100 + 95
+// }
+
+// --- 👨‍💻 ТВОЕ РЕШЕНИЕ ---
+
+// const initialReport = {
+//     gradedCount: 0,
+//     pendingCount: 0,
+//     totalScoreGraded: 0,
+// }
+
+// const submissionsReport = submissions
+//                                 .reduce((report, submission) => {
+//                                     if(submission.status === 'graded') {
+//                                         return {
+//                                             ...report,
+//                                             gradedCount: report.gradedCount + 1,
+//                                             totalScoreGraded: report.totalScoreGraded + submission.score
+
+//                                         }
+                                    
+//                                     }
+//                                     if(submission.status === 'pending') {
+//                                         return {
+//                                             ...report,
+//                                             pendingCount: report.pendingCount + 1
+//                                         }
+//                                     }
+//                                     return report
+//                                 }, initialReport)
+// console.log(submissionsReport)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 19
+
+// // --- ДАННЫЕ (Массив товаров) ---
+// const products = [
+//   { id: 'p1', name: 'Мышь X-7', sales: 150 },
+//   { id: 'p2', name: 'Клавиатура K-120', sales: 120 },
+//   { id: 'p3', name: 'Монитор S-24', sales: 350 },
+//   { id: 'p4', name: 'Наушники H-5', sales: 210 },
+//   { id: 'p5', name: 'Веб-камера C-920', sales: 85 },
+// ]
+
+// // --- ЗАДАЧА ---
+// //
+// // Получи массив, содержащий `name` (string[])
+// // **трех** (Top 3) самых продаваемых товаров,
+// // отсортированный по убыванию продаж.
+// //
+// // --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// // [
+// //   'Монитор S-24',
+// //   'Наушники H-5',
+// //   'Мышь X-7',
+// // ]
+
+// const top3Products = products
+//                             .slice()
+//                             .sort((a, b) => b.sales - a.sales)
+//                             .slice(0, 3)
+//                             .map(({name}) => name)
+
+
+// console.log(top3Products)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 20
+
+// --- ДАННЫЕ (Список студентов) ---
+// const roster = [
+//   { id: 101, name: 'Анна', age: 20, hasPaid: true },
+//   { id: 102, name: 'Борис', age: 22, hasPaid: false },
+//   { id: 103, name: 'Виктор', age: 19, hasPaid: true },
+//   { id: 104, name: 'Галина', age: 17, hasPaid: true }, // 17 лет
+//   { id: 105, name: 'Дмитрий', age: 21, hasPaid: true },
+//   { id: 106, name: 'Ева', age: 20, hasPaid: false },
+// ]
+
+// // --- ЗАДАЧА ---
+// //
+// // Используя массив `roster`, получи **три**
+// // отдельные переменные (константы):
+// //
+// // 1. `isEverybodyPaid`: (boolean)
+// //    Проверка, что **ВСЕ** студенты оплатили.
+// //
+// // 2. `isAnybodyUnderage`: (boolean)
+// //    Проверка, что есть **ХОТЯ БЫ ОДИН** студент
+// //    младше 18 лет (age < 18).
+// //
+// // 3. `overdueStudentNames`: (string[])
+// //    Массив **имен** тех студентов,
+// //    кто **НЕ** оплатил (`hasPaid: false`).
+// //
+// // --- ОЖИДАЕМЫЙ РЕЗУЛЬТАТ ---
+// // isEverybodyPaid: false
+// // isAnybodyUnderage: true
+// // overdueStudentNames: [ 'Борис', 'Ева' ]
+
+// // --- 👨‍💻 ТВОЕ РЕШЕНИЕ ---
+
+// const  isEverybodyPaid = roster
+//                             .every(({hasPaid}) => hasPaid)
+
+// const isAnybodyUnderage = roster
+//                             .some(({age}) => age < 18)
+
+// const overdueStudentNames = roster
+//                                 .filter(({hasPaid}) => !hasPaid)
+//                                 .map(({name}) => name)
+
+// console.log(overdueStudentNames)
+// console.log(isAnybodyUnderage)
+// console.log(isEverybodyPaid)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 21
+
+// --- "Сырые" данные ---
+// Список событий, время в 24-часовом формате
+// const schedule = [
+//   { time: '14:30', event: 'Встреча с командой' },
+//   { time: '09:00', event: 'Утренний Scrum' },
+//   { time: '17:00', event: 'Ревью кода' },
+//   { time: '14:00', event: 'Обед' },
+//   { time: '18:30', event: 'Завершение работы' },
+// ]
+
+// // --- Сортировка по времени ---
+// // Получи НОВЫЙ массив, отсортированный по времени (time)
+// // от самого раннего к самому позднему.
+// //
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ 1:
+// // [
+// //   { time: '09:00', event: 'Утренний Scrum' },
+// //   { time: '14:00', event: 'Обед' },
+// //   { time: '14:30', event: 'Встреча с командой' },
+// //   { time: '17:00', event: 'Ревью кода' },
+// //   { time: '18:30', event: 'Завершение работы' }
+// // ]
+
+// // ХАРДКОР СПОСОБ:
+// // const sortedByTime = schedule
+// //                             .map((item) => {
+// //                                 return {
+// //                                     ...item,
+// //                                     time: +item.time.replace(':', '')
+// //                                 }
+// //                             })
+// //                             .slice()
+// //                             .sort((a, b) => a.time - b.time)
+// //                             .map((item) => {
+// //                                 const charToAdd = ':'
+// //                                 const indexFromEnd = 2
+// //                                 const timeToString = item.time.toString()
+// //                                 const newTime = timeToString.slice(0, -indexFromEnd) + charToAdd + timeToString.slice(-indexFromEnd)
+// //                                 return { 
+// //                                     ...item,
+// //                                     time: newTime.padStart(5, '0')
+// //                                 }
+// //                             })
+// // console.log(sortedByTime)
+// // console.log(schedule)
+
+// // PRO СПОСОБ:
+
+// const sortedByTime = schedule
+//                         .slice()
+//                         .sort((a, b) => a.time.localeCompare(b.time))
+
+// console.log(sortedByTime)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 22
+
+// --- "Сырые" данные ---
+const allowedGuests = [
+  'alice@google.com',
+  'charlie@microsoft.com',
+  'david@amazon.com',
 ]
 
-const initialReport = {
-  totalBalance: 0,
-  totalExpenses: 0,
-}
+const allUsers = [
+  { id: 1, email: 'bob@facebook.com', name: 'Боб' },
+  { id: 2, email: 'eve@apple.com', name: 'Ева' },
+  { id: 3, email: 'david@amazon.com', name: 'Давид' },
+  { id: 4, email: 'charlie@microsoft.com', name: 'Чарли' },
+]
 
-const proReport = transactions.reduce((report, transaction) => {
-    if (transaction.type === 'income') {
-        return{
-            ...report,
-            totalBalance: report.totalBalance + transaction.amount,
-        }
-    }
-      if (transaction.type === 'expense') {
-    return {
-      ...report,
-      totalBalance: report.totalBalance - transaction.amount,
-      totalExpenses: report.totalExpenses + transaction.amount,
-    }
-  }
+// --- ЗАДАЧА 1: Проверка гостя (includes) ---
+// У нас есть email 'eve@apple.com'.
+// Напиши код, который проверит, есть ли этот email
+// в списке 'allowedGuests'.
+//
+// ОЖИДАЕМЫЙ РЕЗУЛЬТАТ 1:
+// false
+const emailToCheck = 'eve@apple.com'
+const isGuestAllowed = null // Твой код здесь
 
-  return report
-}, initialReport)
 
-console.log('Pro Отчет:', proReport)
+
+
+
+
