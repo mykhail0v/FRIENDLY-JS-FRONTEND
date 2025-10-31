@@ -1110,30 +1110,147 @@
 // ЗАДАЧА 22
 
 // --- "Сырые" данные ---
-const allowedGuests = [
-  'alice@google.com',
-  'charlie@microsoft.com',
-  'david@amazon.com',
-]
+// const allowedGuests = [
+//   'alice@google.com',
+//   'charlie@microsoft.com',
+//   'david@amazon.com',
+// ]
 
+// // --- ЗАДАЧА 1: Проверка гостя (includes) ---
+// // У нас есть email 'eve@apple.com'.
+// // Напиши код, который проверит, есть ли этот email
+// // в списке 'allowedGuests'.
+// //
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ 1:
+// // false
+// const emailToCheck = 'eve@apple.com'
+// const isGuestAllowed = allowedGuests
+//                                 .includes(emailToCheck)
+                            
+// console.log(isGuestAllowed)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 23
+
+// --- Фильтрация по списку (filter + includes) ---
+// Нам нужен НОВЫЙ массив 'priorityUsers', который будет
+// содержать *только* тех юзеров (объекты) из 'allUsers',
+// чьи email'ы ЕСТЬ в списке 'allowedGuests'.
+// const allowedGuests = [
+//   'alice@google.com',
+//   'charlie@microsoft.com',
+//   'david@amazon.com',
+// ]
+
+// const allUsers = [
+//   { id: 1, email: 'bob@facebook.com', name: 'Боб' },
+//   { id: 2, email: 'eve@apple.com', name: 'Ева' },
+//   { id: 3, email: 'david@amazon.com', name: 'Давид' },
+//   { id: 4, email: 'charlie@microsoft.com', name: 'Чарли' },
+// ]
+
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ 2:
+// // [
+// //   { id: 3, email: 'david@amazon.com', name: 'Давид' },
+// //   { id: 4, email: 'charlie@microsoft.com', name: 'Чарли' }
+// // ]
+// const priorityUsers = allUsers
+//                         .filter(({email}) => {
+//                             return allowedGuests.includes(email)
+//                         })
+
+// // --- Вывод ---
+// // console.log('--- Проверка гостя ---')
+// // console.log(isGuestAllowed)
+
+// console.log('--- Приоритетные юзеры ---')
+// console.log(priorityUsers)
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 24
+
+// --- ДАННЫНЫЕ С "API" ---
+// Список имен пользователей, которых нужно отсортировать.
+// const userNames = [
+//   'Яковлев',
+//   'Андреев',
+//   'Григорьев',
+//   'Борисов',
+//   'Яковлев', // <-- дубликат!
+//   'Алексеев',
+// ]
+
+// // --- ЗАДАЧА 1 ---
+// // Получи НОВЫЙ массив `sortedNames`, в котором имена
+// // отсортированы по алфавиту (от 'А' до 'Я').
+// // 
+// // ВАЖНО:
+// // 1. Оригинальный массив `userNames` не должен измениться!
+// // 2. Используй "правильный" метод для сортировки строк.
+// //
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ:
+// // [ 'Алексеев', 'Андреев', 'Борисов', 'Григорьев', 'Яковлев', 'Яковлев' ]
+
+// const sortedNames = userNames
+//                         .slice()
+//                         .sort((a, b) => a.localeCompare(b))
+
+// console.log(sortedNames)
+
+// // --- ЗАДАЧА 2 (Бонус 🏋️) ---
+// // Используя `sortedNames` (уже отсортированный массив),
+// // получи НОВЫЙ массив `uniqueSortedNames`, в котором
+// // НЕТ дубликатов.
+// //
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ:
+// // [ 'Алексеев', 'Андреев', 'Борисов', 'Григорьев', 'Яковлев' ]
+
+// const uniqueSortedNames = sortedNames
+//                                 .filter((name, i) => {                                    
+//                                      return sortedNames.indexOf(name) === i
+//                                 })
+
+// console.log(uniqueSortedNames)                   
+
+///////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 25
+
+// --- ДАННЫНЫЕ С "API" ---
+
+// "Белый список" 🕵️‍♂️ ID пользователей, 
+// у которых есть "Премиум" подписка.
+const premiumUserIds = ['id-b7x', 'id-f2p', 'id-k9q']
+
+// Общий список *всех* пользователей, зашедших на сайт.
 const allUsers = [
-  { id: 1, email: 'bob@facebook.com', name: 'Боб' },
-  { id: 2, email: 'eve@apple.com', name: 'Ева' },
-  { id: 3, email: 'david@amazon.com', name: 'Давид' },
-  { id: 4, email: 'charlie@microsoft.com', name: 'Чарли' },
+  { id: 'id-a1v', name: 'Игорь', country: 'UA' },
+  { id: 'id-f2p', name: 'Ольга', country: 'PL' },
+  { id: 'id-z4m', name: 'Максим', country: 'UA' },
+  { id: 'id-k9q', name: 'Анна', country: 'DE' },
+  { id: 'id-b7x', name: 'Дмитрий', country: 'UA' },
 ]
 
-// --- ЗАДАЧА 1: Проверка гостя (includes) ---
-// У нас есть email 'eve@apple.com'.
-// Напиши код, который проверит, есть ли этот email
-// в списке 'allowedGuests'.
+// --- ЗАДАЧКА ---
+// Нам нужно получить НОВЫЙ массив `priorityUsers`,
+// который содержит *только* тех пользователей (объекты)
+// из `allUsers`, чьи `id` *включены* (includes) 
+// в "белый список" `premiumUserIds`.
 //
-// ОЖИДАЕМЫЙ РЕЗУЛЬТАТ 1:
-// false
-const emailToCheck = 'eve@apple.com'
-const isGuestAllowed = null // Твой код здесь
+// ОЖИДАЕМЫЙ РЕЗУЛЬТАТ:
+// [
+//   { id: 'id-f2p', name: 'Ольга', country: 'PL' },
+//   { id: 'id-k9q', name: 'Анна', country: 'DE' },
+//   { id: 'id-b7x', name: 'Дмитрий', country: 'UA' }
+// ]
 
+const priorityUsers = allUsers
+                            .filter(({id}) => premiumUserIds.includes(id))
 
+// --- ВЫВОД В КОНСОЛЬ ---
+console.log('Приоритетные пользователи:', priorityUsers)
 
 
 
