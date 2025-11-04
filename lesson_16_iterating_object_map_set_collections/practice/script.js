@@ -198,53 +198,174 @@
 
 // ЗАДАЧА 5
 
-// --- ДАННЫЕ С "API" ---
-// "Плоский" 🥞 список логов (событий)
-// с твоего "сервера".
-const logEntries = [
-  { level: 'ERROR', msg: 'Failed to connect to DB', ts: 17001 },
-  { level: 'INFO', msg: 'User 1 logged in', ts: 17002 },
-  { level: 'WARN', msg: 'DB connection slow', ts: 17003 },
-  { level: 'INFO', msg: 'User 2 viewed page', ts: 17004 },
-  { level: 'ERROR', msg: 'Payment failed for user 2', ts: 17005 },
-]
+// // --- ДАННЫЕ С "API" ---
+// // "Плоский" 🥞 список логов (событий)
+// // с твоего "сервера".
+// const logEntries = [
+//   { level: 'ERROR', msg: 'Failed to connect to DB', ts: 17001 },
+//   { level: 'INFO', msg: 'User 1 logged in', ts: 17002 },
+//   { level: 'WARN', msg: 'DB connection slow', ts: 17003 },
+//   { level: 'INFO', msg: 'User 2 viewed page', ts: 17004 },
+//   { level: 'ERROR', msg: 'Payment failed for user 2', ts: 17005 },
+// ]
 
-// --- ЗАДАЧА ---
-// "Сверни" 🜜️ "плоский" 🥞 массив `logEntries`
-// в **НОВЫЙ `Map`** 🗺️ (НЕ `Object` {}!).
-//
-// "Ключами" 🔑 в `Map` должны быть "уровни" 📈 (`level`).
-// "Значениями" 📥 в `Map` должны быть **массивы** 📜 
-// (содержащие *полные объекты* 📦 логов этого "уровня").
-//
-// ОЖИДАЕМЫЙ РЕЗУЛЬТАТ:
-// Map(3) {
-//   'ERROR' => [
-//     { level: 'ERROR', msg: 'Failed to connect to DB', ts: 17001 },
-//     { level: 'ERROR', msg: 'Payment failed for user 2', ts: 17005 }
-//   ],
-//   'INFO' => [
-//     { level: 'INFO', msg: 'User 1 logged in', ts: 17002 },
-//     { level: 'INFO', msg: 'User 2 viewed page', ts: 17004 }
-//   ],
-//   'WARN' => [
-//     { level: 'WARN', msg: 'DB connection slow', ts: 17003 }
-//   ]
-// }
+// // --- ЗАДАЧА ---
+// // "Сверни" 🜜️ "плоский" 🥞 массив `logEntries`
+// // в **НОВЫЙ `Map`** 🗺️ (НЕ `Object` {}!).
+// //
+// // "Ключами" 🔑 в `Map` должны быть "уровни" 📈 (`level`).
+// // "Значениями" 📥 в `Map` должны быть **массивы** 📜 
+// // (содержащие *полные объекты* 📦 логов этого "уровня").
+// //
+// // ОЖИДАЕМЫЙ РЕЗУЛЬТАТ:
+// // Map(3) {
+// //   'ERROR' => [
+// //     { level: 'ERROR', msg: 'Failed to connect to DB', ts: 17001 },
+// //     { level: 'ERROR', msg: 'Payment failed for user 2', ts: 17005 }
+// //   ],
+// //   'INFO' => [
+// //     { level: 'INFO', msg: 'User 1 logged in', ts: 17002 },
+// //     { level: 'INFO', msg: 'User 2 viewed page', ts: 17004 }
+// //   ],
+// //   'WARN' => [
+// //     { level: 'WARN', msg: 'DB connection slow', ts: 17003 }
+// //   ]
+// // }
 
-// Твой "чистый лист" 📄... "Без подсказок" 🥷!
-const logsByLevel = logEntries.reduce((acc, logEntry) => {
-    const level = logEntry.level
-    if(!acc.has(level)) {
-        acc.set(level, [])
-    }
-    acc.get(level).push(logEntry)
-    return acc
-}, new Map()) 
+// // Твой "чистый лист" 📄... "Без подсказок" 🥷!
+// const logsByLevel = logEntries.reduce((acc, logEntry) => {
+//     const level = logEntry.level
+//     if(!acc.has(level)) {
+//         acc.set(level, [])
+//     }
+//     acc.get(level).push(logEntry)
+//     return acc
+// }, new Map()) 
                             
 
-// --- ВЫВОД В КОНСОЛЬ ---
-console.log('Логи по Уровням:', logsByLevel)
+// // --- ВЫВОД В КОНСОЛЬ ---
+// console.log('Логи по Уровням:', logsByLevel)
+
+////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 6
+
+/*
+Аналитика корзины
+Представь, что ты работаешь над фичей для e-commerce сайта. У тебя есть массив объектов, представляющий корзину пользователя. Каждый объект — это товар.
+
+JavaScript
+
+const cart = [
+  { id: 1, name: 'iPhone 15', category: 'Electronics', price: 999, quantity: 1, },
+  { id: 2, name: 'Running Shoes', category: 'Sport', price: 120, quantity: 2, },
+  { id: 3, name: 'AirPods Pro', category: 'Electronics', price: 249, quantity: 1, },
+  { id: 4, name: 'Coffee Maker', category: 'Home', price: 80, quantity: 1, },
+  { id: 5, name: 'Samsung TV', category: 'Electronics', price: 1499, quantity: 0, }, // Нет в наличии
+]
+Твоя задача: Напиши функцию analyzeCart(cart), которая должна вернуть объект со следующей информацией:
+
+totalPrice: Общая стоимость всех товаров в корзине, которые есть в наличии (т.е. quantity > 0). Учитывай и цену, и количество (price * quantity).
+
+electronicsCount: Количество уникальных наименований (name) товаров из категории 'Electronics', которые есть в наличии.
+*/
+
+// const cart = [
+//   { id: 1, name: 'iPhone 15', category: 'Electronics', price: 999, quantity: 1, },
+//   { id: 2, name: 'Running Shoes', category: 'Sport', price: 120, quantity: 2, },
+//   { id: 3, name: 'AirPods Pro', category: 'Electronics', price: 249, quantity: 1, },
+//   { id: 4, name: 'Coffee Maker', category: 'Home', price: 80, quantity: 1, },
+//   { id: 5, name: 'Samsung TV', category: 'Electronics', price: 1499, quantity: 0, }, // Нет в наличии
+// ]
+
+// // нуб подход:
+
+// const analyzeCart = (cart) => {
+//     const initialReport = {
+//     totalPrice: 0,
+//     electronicsCount: 0,
+//     }
+//     const electronicsProducts = cart
+//                                 .filter(({category, quantity}) => category === 'Electronics' && quantity > 0)
+//                                 .map(({name})=>name)
+//     const uniqueElectronicsNames = new Set(electronicsProducts)
+//     const result = cart
+//                     .filter(({quantity}) => quantity > 0)
+//                     .reduce((report, product) => {
+//                         return {
+//                             ...report,
+//                             totalPrice: report.totalPrice + product.quantity * product.price,
+//                             electronicsCount: uniqueElectronicsNames.size
+
+//                         }
+//                     }, initialReport)
+//     return result        
+// }
+
+// console.log(analyzeCart(cart))
+
+// // pro подход:
+
+// const analyzeCartV2 = (cart) => {
+//     const initialState = {
+//         totalPrice: 0,
+//         electronicsSet: new Set(),
+//     }
+
+// const report = cart.reduce((acc, product) => {
+//     if(product.quantity > 0) {
+//         acc.totalPrice += product.price * product.quantity
+//         if (product.category === 'Electronics') {
+//             acc.electronicsSet.add(product.name)
+//         }
+//     }
+//     return acc
+// }, initialState)
+//     return {
+//         totalPrice: report.totalPrice,
+//         electronicsCount: report.electronicsSet.size,
+//     }
+// }
+
+// console.log(analyzeCartV2(cart))
+
+////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 7
+
+/*
+Ты работаешь в админ-панели. У тебя есть массив объектов пользователей, пришедший с сервера.
+
+JavaScript
+
+const users = [
+  { id: 101, name: 'Alice', role: 'admin', department: 'HR', age: 28, isActive: true, },
+  { id: 102, name: 'Bob', role: 'user', department: 'Engineering', age: 35, isActive: true, },
+  { id: 103, name: 'Charlie', role: 'user', department: 'Engineering', age: 42, isActive: false, },
+  { id: 104, name: 'David', role: 'admin', department: 'Marketing', age: 30, isActive: true, },
+  { id: 105, name: 'Eve', role: 'user', department: 'HR', age: 25, isActive: true, },
+  { id: 106, name: 'Frank', role: 'admin', department: 'HR', age: 45, isActive: true, }, // Админ в том же отделе HR
+]
+Твоя задача: Напиши функцию analyzeUsers(users), которая должна вернуть объект со следующей информацией:
+
+averageAgeActiveUsers: Средний возраст только активных пользователей (isActive: true).
+
+uniqueAdminDepartments: Количество уникальных отделов (department), в которых есть хотя бы один admin
+*/
+
+const users = [
+  { id: 101, name: 'Alice', role: 'admin', department: 'HR', age: 28, isActive: true, },
+  { id: 102, name: 'Bob', role: 'user', department: 'Engineering', age: 35, isActive: true, },
+  { id: 103, name: 'Charlie', role: 'user', department: 'Engineering', age: 42, isActive: false, },
+  { id: 104, name: 'David', role: 'admin', department: 'Marketing', age: 30, isActive: true, },
+  { id: 105, name: 'Eve', role: 'user', department: 'HR', age: 25, isActive: true, },
+  { id: 106, name: 'Frank', role: 'admin', department: 'HR', age: 45, isActive: true, }, // Админ в том же отделе HR
+]
+
+const analuzeAgeActiveUsers = () => {}
+
+
+
 
 
 
