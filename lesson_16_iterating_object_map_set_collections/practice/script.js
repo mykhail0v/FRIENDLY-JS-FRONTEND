@@ -353,35 +353,210 @@ averageAgeActiveUsers: Средний возраст только активны
 uniqueAdminDepartments: Количество уникальных отделов (department), в которых есть хотя бы один admin
 */
 
-const users = [
-  { id: 101, name: 'Alice', role: 'admin', department: 'HR', age: 28, isActive: true, },
-  { id: 102, name: 'Bob', role: 'user', department: 'Engineering', age: 35, isActive: true, },
-  { id: 103, name: 'Charlie', role: 'user', department: 'Engineering', age: 42, isActive: false, },
-  { id: 104, name: 'David', role: 'admin', department: 'Marketing', age: 30, isActive: true, },
-  { id: 105, name: 'Eve', role: 'user', department: 'HR', age: 25, isActive: true, },
-  { id: 106, name: 'Frank', role: 'admin', department: 'HR', age: 45, isActive: true, }, // Админ в том же отделе HR
+// const users = [
+//   { id: 101, name: 'Alice', role: 'admin', department: 'HR', age: 28, isActive: true, },
+//   { id: 102, name: 'Bob', role: 'user', department: 'Engineering', age: 35, isActive: true, },
+//   { id: 103, name: 'Charlie', role: 'user', department: 'Engineering', age: 42, isActive: false, },
+//   { id: 104, name: 'David', role: 'admin', department: 'Marketing', age: 30, isActive: true, },
+//   { id: 105, name: 'Eve', role: 'user', department: 'HR', age: 25, isActive: true, },
+//   { id: 106, name: 'Frank', role: 'admin', department: 'HR', age: 45, isActive: true, }, // Админ в том же отделе HR
+// ]
+
+// // с ошибкой:
+// // const analyzeAgeActiveUsers = (users) => {
+// //     const initialState = {
+// //         sumAgeActiveUsers: 0,
+// //         uniqueAdminDepartments: new Set(),
+// //     }
+// //     const usersIsActive = users.filter(({isActive}) => isActive)
+// //     const processedState = usersIsActive                        
+// //                         .reduce((acc, user) => {
+// //                                 acc.sumAgeActiveUsers += user.age
+// //                                 if (user.role === 'admin') {
+// //                                     acc.uniqueAdminDepartments.add(user.department)
+// //                                 }
+// //                                 return acc                                  
+                            
+// //                         }, initialState)
+// //     return {
+// //     averageAgeActiveUsers: processedState.sumAgeActiveUsers / usersIsActive.length,
+// //     uniqueAdminDepartments: processedState.uniqueAdminDepartments.size,    
+// //     }                   
+// // }
+// // console.log(analyzeAgeActiveUsers(users))
+
+// const analyzeAgeActiveUsers = (users) => {
+//         const initialState = {
+//             isActiveLenght: 0,
+//             sumAgeActiveUsers: 0,
+//             uniqueAdminDepartments: new Set(),
+//         }
+//         const processedState = users.reduce((acc, user) => {
+//             if (user.isActive) {
+//                 acc.isActiveLenght += 1,
+//                 acc.sumAgeActiveUsers += user.age
+//             }
+//             if(user.role === 'admin') {
+//                 acc.uniqueAdminDepartments.add(user.department)
+//             } return acc
+//         }, initialState)
+//     return {
+//         averageAgeActiveUsers: processedState.sumAgeActiveUsers / processedState.isActiveLenght,
+//         uniqueAdminDepartments: processedState.uniqueAdminDepartments.size,
+//     }
+// }
+// console.log(analyzeAgeActiveUsers(users))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 8
+
+/*
+    Группировка по категориям
+Представь, что у тебя есть "плоский" список товаров. Тебе нужно отсортировать их по "полкам" (категориям), чтобы пользователю было удобно их просматривать.
+
+Твоя задача: Напиши функцию groupProductsByCategory(products), которая принимает массив объектов products и возвращает Map, где:
+
+Ключ: Название категории (строка).
+
+Значение: Массив всех товаров из этой категории.
+
+Входные данные:
+
+JavaScript
+
+const products = [
+  { id: 1, name: 'Laptop', category: 'Electronics', },
+  { id: 2, name: 'T-Shirt', category: 'Apparel', },
+  { id: 3, name: 'Headphones', category: 'Electronics', },
+  { id: 4, name: 'Sneakers', category: 'Apparel', },
+  { id: 5, name: 'Coffee Mug', category: 'Home', },
+]
+*/
+
+// const products = [
+//   { id: 1, name: 'Laptop', category: 'Electronics', },
+//   { id: 2, name: 'T-Shirt', category: 'Apparel', },
+//   { id: 3, name: 'Headphones', category: 'Electronics', },
+//   { id: 4, name: 'Sneakers', category: 'Apparel', },
+//   { id: 5, name: 'Coffee Mug', category: 'Home', },
+// ]
+
+// const groupProductsByCategory = (products) => {
+//     const categoryMap = new Map()
+//     products.forEach((product) => {
+//         const category = product.category
+//         if (categoryMap.has(category)) {
+//             const currentProducts = categoryMap.get(category)
+//             currentProducts.push(product)
+//         } else {
+//             categoryMap.set(category, [product])
+//         }
+//     })
+//     return categoryMap
+// }
+
+// console.log(groupProductsByCategory(products))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 9
+
+/*
+Группировка постов (Закрепление)
+Представь, что ты делаешь секцию "Посты автора" для блога. У тебя есть "плоский" массив постов, пришедший с сервера.
+
+JavaScript
+
+const posts = [
+  { id: 'p1', title: 'JavaScript Tips', author: 'Alice', },
+  { id: 'p2', title: 'CSS Magic', author: 'Bob', },
+  { id: 'p3', title: 'React Hooks', author: 'Alice', },
+  { id: 'p4', title: 'Node.js Performance', author: 'Charlie', },
+  { id: 'p5', title: 'Advanced CSS', author: 'Bob', },
+]
+Твоя задача: Напиши функцию groupPostsByAuthor(posts), которая возвращает Map, где:
+
+Ключ: Имя автора (строка).
+
+Значение: Массив названий постов (массив строк), которые написал этот автор.
+*/
+
+// const posts = [
+//   { id: 'p1', title: 'JavaScript Tips', author: 'Alice', },
+//   { id: 'p2', title: 'CSS Magic', author: 'Bob', },
+//   { id: 'p3', title: 'React Hooks', author: 'Alice', },
+//   { id: 'p4', title: 'Node.js Performance', author: 'Charlie', },
+//   { id: 'p5', title: 'Advanced CSS', author: 'Bob', },
+// ]
+
+// const groupPostsByAuthor = (posts) => {
+//     const authorMap = new Map()
+//     posts.forEach((post) => {
+//         const author = post.author
+//         if(authorMap.has(author)) {
+//             const currentPost = authorMap.get(author)
+//             currentPost.push(post.title)
+//         } else {
+//             authorMap.set(author, [post.title])
+//         }
+
+//     })
+// return authorMap
+// }
+
+// console.log(groupPostsByAuthor(posts))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 10
+
+/*
+    Финансовая сводка (Закрепление)
+Представь, что ты делаешь PWA (Progressive Web App) для учета личных финансов. У тебя есть массив транзакций.
+
+JavaScript
+
+const transactions = [
+  { id: 1, type: 'income', amount: 1500, description: 'Salary', },
+  { id: 2, type: 'expense', amount: 100, description: 'Coffee', },
+  { id: 3, type: 'expense', amount: 50, description: 'Bus ticket', },
+  { id: 4, type: 'income', amount: 200, description: 'Freelance', },
+  { id: 5, type: 'expense', amount: 1200, description: 'Rent', },
+  { id: 6, type: 'investment', amount: 300, description: 'Stocks', },
+  { id: 7, type: 'expense', amount: 40, description: 'Lunch', },
+]
+Твоя задача: Напиши функцию getTransactionReport(transactions), которая возвращает Map, где:
+
+Ключ: Тип транзакции (строка: 'income', 'expense', 'investment').
+
+Значение: Общая сумма (число) всех транзакций этого типа.
+*/
+
+const transactions = [
+  { id: 1, type: 'income', amount: 1500, description: 'Salary', },
+  { id: 2, type: 'expense', amount: 100, description: 'Coffee', },
+  { id: 3, type: 'expense', amount: 50, description: 'Bus ticket', },
+  { id: 4, type: 'income', amount: 200, description: 'Freelance', },
+  { id: 5, type: 'expense', amount: 1200, description: 'Rent', },
+  { id: 6, type: 'investment', amount: 300, description: 'Stocks', },
+  { id: 7, type: 'expense', amount: 40, description: 'Lunch', },
 ]
 
-const analuzeAgeActiveUsers = () => {}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const getTransactionReport = (transactions) => {
+    const typeMap = new Map()
+    transactions.forEach((transaction) => {
+        const type = transaction.type
+        if(typeMap.has(type)) {
+            let currentType = typeMap.get(type)
+            typeMap.set(type, currentType + transaction.amount)
+        } else {
+            typeMap.set(type, transaction.amount)
+        }
+    })
+    return typeMap
+}
+console.log(getTransactionReport(transactions))
 
 
 
