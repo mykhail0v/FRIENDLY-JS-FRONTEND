@@ -1,0 +1,12 @@
+{
+    "name": "Никита",
+    "age": "25",
+    "city": "Одесса",
+    "address": {
+        "street": "ул. Дерибасовская, д. 1, кв. 3",
+        "zipcode": 123456
+    },
+    "todos": ["sleep", "eat", "work", "train", "learn"],
+    "hasCat": false,
+    "yacht": null
+}
