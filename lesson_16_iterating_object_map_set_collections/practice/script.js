@@ -533,30 +533,392 @@ const transactions = [
 Значение: Общая сумма (число) всех транзакций этого типа.
 */
 
-const transactions = [
-  { id: 1, type: 'income', amount: 1500, description: 'Salary', },
-  { id: 2, type: 'expense', amount: 100, description: 'Coffee', },
-  { id: 3, type: 'expense', amount: 50, description: 'Bus ticket', },
-  { id: 4, type: 'income', amount: 200, description: 'Freelance', },
-  { id: 5, type: 'expense', amount: 1200, description: 'Rent', },
-  { id: 6, type: 'investment', amount: 300, description: 'Stocks', },
-  { id: 7, type: 'expense', amount: 40, description: 'Lunch', },
+// const transactions = [
+//   { id: 1, type: 'income', amount: 1500, description: 'Salary', },
+//   { id: 2, type: 'expense', amount: 100, description: 'Coffee', },
+//   { id: 3, type: 'expense', amount: 50, description: 'Bus ticket', },
+//   { id: 4, type: 'income', amount: 200, description: 'Freelance', },
+//   { id: 5, type: 'expense', amount: 1200, description: 'Rent', },
+//   { id: 6, type: 'investment', amount: 300, description: 'Stocks', },
+//   { id: 7, type: 'expense', amount: 40, description: 'Lunch', },
+// ]
+
+// const getTransactionReport = (transactions) => {
+//     const typeMap = new Map()
+//     transactions.forEach((transaction) => {
+//         const type = transaction.type
+//         if(typeMap.has(type)) {
+//             let currentType = typeMap.get(type)
+//             typeMap.set(type, currentType + transaction.amount)
+//         } else {
+//             typeMap.set(type, transaction.amount)
+//         }
+//     })
+//     return typeMap
+// }
+// console.log(getTransactionReport(transactions))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 11
+
+/*
+Анализ зарплат
+
+Давай сразу к практике. У нас есть объект salaries (зарплаты) в IT-отделе.
+
+JavaScript
+
+const salaries = {
+  john: 500,
+  pete: 750,
+  mary: 600,
+  steve: 1200,
+  anna: 2000,
+}
+Твоя задача: Напиши функцию analyzeSalaries(salaries), которая должна вернуть объект с двумя полями:
+
+total: Общая сумма всех зарплат.
+
+topEarner: Имя (ключ) сотрудника с самой высокой зарплатой.
+
+Если объект salaries пустой, функция должна вернуть { total: 0, topEarner: null }.
+*/
+
+//  с плохой оптимизацией:
+// const salaries = {
+//   john: 500,
+//   pete: 750,
+//   mary: 600,
+//   steve: 1200,
+//   anna: 2000,
+// }
+
+// const analyzeSalaries = (salaries) => {
+//     const entries = Object.entries(salaries)
+//         if (entries.length === 0) {
+//         return {
+//             total: 0,
+//             topEarner: null,
+//         }}
+//     const total = Object.values(salaries).reduce((acc, current) => acc + current, 0)
+//     const topEarner = entries.slice().sort((a, b) => b[1] - a[1]).slice(0, 1).flat()
+    
+//     return {
+//         total: total,
+//         topEarner: topEarner[0],
+//     }
+// }
+
+// console.log(analyzeSalaries(salaries))
+
+// норм:
+
+// const salaries = {
+//   john: 500,
+//   pete: 750,
+//   mary: 600,
+//   steve: 1200,
+//   anna: 2000,
+// }
+
+// const analyzeSalaries = (salaries) => {
+//     const entries = Object.entries(salaries)
+//     if (entries.length === 0) {
+//         return {
+//             total: 0,
+//             topEarner: null,
+//         }
+//     }
+//     const total = Object.values(salaries).reduce((sum, value) => sum + value, 0)
+//     const winnerEntry = entries.reduce((acc, current) => {
+//         if(current[1] > acc[1]) {
+//             return current
+//         } else {
+//             return acc
+//         }
+//     })
+
+//     return {
+//         total: total,
+//         topEarner: winnerEntry[0],
+//     }
+// }
+
+// console.log(analyzeSalaries(salaries))
+// console.log(analyzeSalaries({}))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 11
+
+/*
+Фильтрация объекта (Закрепление)
+У тебя есть объект с профилем пользователя, где намешаны разные типы данных.
+
+JavaScript
+
+const userProfile = {
+  id: 101,
+  username: 'johndoe',
+  theme: 'dark',
+  showAds: false,
+  lastLogin: 1730802154, // timestamp
+  email: 'john@example.com',
+  level: 15,
+}
+Твоя задача: Напиши функцию filterProfile(profile), которая возвращает новый объект, содержащий только те пары ключ-значение из profile, у которых значение (value) не является числом (number).
+*/
+
+// // норм подход:
+
+// const userProfile = {
+//   id: 101,
+//   username: 'johndoe',
+//   theme: 'dark',
+//   showAds: false,
+//   lastLogin: 1730802154, // timestamp
+//   email: 'john@example.com',
+//   level: 15,
+// }
+
+// // const filterProfile = (profile) => {
+// //     const profileEntries = Object.entries(profile)
+// //     const filterProfileEntries = []
+// //     for (const entry of profileEntries) {
+// //         if (typeof entry[1] !== 'number') {
+// //             filterProfileEntries.push(entry)
+// //         }
+// //     }
+// //     const result = Object.fromEntries(filterProfileEntries)
+// //     return result
+// // }
+
+// // console.log(filterProfile(userProfile))
+
+// // про подход: 
+
+// const filterProfile = (profile) => Object.fromEntries(Object.entries(profile).filter(([_, value]) => typeof value !== 'number'))
+
+// console.log(filterProfile(userProfile))
+
+//  // P.S. Знак '_' — это соглашение в JS, 
+//  // "Я знаю, что здесь есть 'key', но он мне не нужен"
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 12
+
+/*
+"Царь горы" (Закрепление)
+Представь, что ты работаешь над фронтендом. У тебя есть массив объектов, описывающих различные UI-элементы (кнопки, баннеры, инпуты), которые пользователь добавил на страницу.
+
+JavaScript
+
+const uiElements = [
+  { id: 'btn-submit', type: 'button', width: 120, height: 30, }, // area: 3600
+  { id: 'banner-main', type: 'image', width: 728, height: 90, }, // area: 65520
+  { id: 'input-name', type: 'input', width: 250, height: 40, }, // area: 10000
+  { id: 'sidebar-ad', type: 'image', width: 300, height: 250, }, // area: 75000
+  { id: 'footer-logo', type: 'image', width: 100, height: 100, }, // area: 10000
+]
+Твоя задача: Напиши функцию findLargestElement(elements), которая должна найти и вернуть id того элемента, у которого самая большая ПЛОЩАДЬ (т.е. width * height).
+*/
+
+// нуб-подход с плохой оптимизацией:
+const uiElements = [
+  { id: 'btn-submit', type: 'button', width: 120, height: 30, }, // area: 3600
+  { id: 'banner-main', type: 'image', width: 728, height: 90, }, // area: 65520
+  { id: 'input-name', type: 'input', width: 250, height: 40, }, // area: 10000
+  { id: 'sidebar-ad', type: 'image', width: 300, height: 250, }, // area: 75000
+  { id: 'footer-logo', type: 'image', width: 100, height: 100, }, // area: 10000
 ]
 
-const getTransactionReport = (transactions) => {
-    const typeMap = new Map()
-    transactions.forEach((transaction) => {
-        const type = transaction.type
-        if(typeMap.has(type)) {
-            let currentType = typeMap.get(type)
-            typeMap.set(type, currentType + transaction.amount)
+// const findLargestElement = (elements) => {
+//     const LargestElement = elements
+//                             .map(({id, width, height}) => [id, width * height])
+//                             .reduce((acc, current) => {
+//                                 if (current[1] > acc[1]) {
+//                                     return current
+//                                 } else {
+//                                     return acc
+//                                 }
+//                             })   
+//     return LargestElement[0]
+// }
+// console.log(findLargestElement(uiElements))
+
+// про подход:
+
+const findLargestElement = (elements) => {
+    if(elements.lenght === 0) {
+        return null
+    }
+    const winnerObject = elements.reduce((acc, current) => {
+        const accArea = acc.width * acc.height
+        const currentArea = current.width * current.height
+        if (currentArea > accArea) {
+            return current
         } else {
-            typeMap.set(type, transaction.amount)
+            return acc
         }
     })
-    return typeMap
+    return winnerObject.id
 }
-console.log(getTransactionReport(transactions))
+
+console.log(findLargestElement(uiElements))
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 13
+
+// Big O - нотация
+
+/*
+Задачка 1: Поиск сокровища
+JavaScript
+
+const findTreasure = (arr) => {
+  const treasure = "💎"
+  let steps = 0
+
+  for (let i = 0; i < arr.length; i++) {
+    steps++ // Считаем шаг
+    if (arr[i] === treasure) {
+      console.log(`Нашли за ${steps} шагов!`)
+      return true
+    }
+  }
+
+  console.log(`Не нашли, ${steps} шагов впустую`)
+  return false
+}
+
+// const items = ["📕", "🔑", "💎", "👑"]
+// findTreasure(items) 
+Вопрос: Какова сложность findTreasure в худшем случае?
+
+🏋️‍♂️ Задачка 2: Таинственная коробка
+JavaScript
+
+const mysteriousBox = (arr) => {
+  // Нас волнует только первая и последняя вещь
+  const firstItem = arr[0]
+  const lastItem = arr[arr.length - 1]
+
+  console.log(`Первая: ${firstItem}, Последняя: ${lastItem}`)
+}
+Вопрос: Какова сложность mysteriousBox?
+
+🏋️‍♂️ Задачка 3: Построение всех пар
+JavaScript
+
+const buildAllPairs = (arr) => {
+  const pairs = []
+
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length; j++) {
+      // (Пропускаем пару с самим собой, 
+      //  но это не меняет общей картины)
+      if (i !== j) { 
+        pairs.push([arr[i], arr[j]])
+      }
+    }
+  }
+
+  return pairs
+}
+Вопрос: Какова сложность buildAllPairs?
+*/
+
+/*
+    ОТВЕТЫ:
+1. O(n) - потому что надо перебрать весь массив
+
+2.O(1) - потому что мы берём элементы по конкретному индексу
+
+3. O(n²) - потому что надо перебрать массив на каждый перебираемый элемент массива
+*/
+
+/////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 14
+
+/*
+    О - нотация 
+    Хитрый механизм
+JavaScript
+
+const trickyMechanism = (arr) => {
+  const n = arr.length
+  let total = 0
+
+  // --- Блок 1: Половина ---
+  // Проходим ровно по половине массива
+  for (let i = 0; i < n / 2; i++) {
+    total += arr[i]
+  }
+
+  // --- Блок 2: Деление ---
+  // Цикл, который каждый раз делит n пополам,
+  // пока не дойдет до 1
+  let j = n
+  while (j > 1) {
+    j = Math.floor(j / 2)
+    total += j
+  }
+
+  // --- Блок 3: Константа ---
+  // Цикл, который всегда делает 100 шагов
+  for (let k = 0; k < 100; k++) {
+    total += k
+  }
+
+  return total
+}
+Вопрос: Какова общая сложность trickyMechanism?
+*/
+
+/*
+Ответ:
+
+O(n) - потому что в первом переборе мы проходим n/2 но т.к. отбрасываем константы - "округляем" до n, во втором и третьем переборах сложности (log n) и (100) и они меньше чем n, потому мы их отбрасываем тоже как константы и смотрим сложность по самому большому значению - n, получается O(n)
+
+Блок 1: O(n/2) мы упрощаем до O(n) (отбрасываем константу 1/2).
+
+Блок 2: Это O(log n).
+
+Блок 3: O(100) мы упрощаем до O(1) (это просто константа).
+
+И главное правило: O(n) + O(log n) + O(1) = O(n).
+
+Мы всегда берем самый "тяжелый" (доминирующий) член, а всеми остальными, которые растут медленнее, пренебрегаем.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
