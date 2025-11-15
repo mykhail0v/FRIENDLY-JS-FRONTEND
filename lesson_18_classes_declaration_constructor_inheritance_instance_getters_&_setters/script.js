@@ -20,32 +20,32 @@
 
 ////////////////////////////////////////////////////////
 
-// class Student {
-//     planet = 'Земля'
-//     country = 'Украина'
-//     region
+class Student {
+    planet = 'Земля'
+    country = 'Украина'
+    region
 
-//     constructor(name, age) {
-//         this.name = name
-//         this.age = age
-//     }
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
 
-//     logAge() {
-//         console.log(this.age)
-//     }
-// }
+    logAge() {
+        console.log(this.age)
+    }
+}
 
-// const firstStudent = new Student('Вася', 21)
-// const secondStudent = new Student('Петя', 18)
+const firstStudent = new Student('Вася', 21)
+const secondStudent = new Student('Петя', 18)
 
-// console.log('firstStudent:', firstStudent)
-// console.log('secondStudent:', secondStudent)
+console.log('firstStudent:', firstStudent)
+console.log('secondStudent:', secondStudent)
 
-// console.log('Имя первого студента:', firstStudent.name)
-// console.log('Имя второго студента:', secondStudent.name)
+console.log('Имя первого студента:', firstStudent.name)
+console.log('Имя второго студента:', secondStudent.name)
 
-// firstStudent.logAge()
-// secondStudent.logAge()
+firstStudent.logAge()
+secondStudent.logAge()
 
 //////////////////////////////////////////////////////////
 
@@ -222,31 +222,31 @@
 
 // ПЕРЕОПРЕДЕЛЕНИЕ КОНСТРУКТОРА В НАСЛЕДУЕМОМ КЛАССЕ
 
-class Person {
-    constructor(name, age) {
-        this.name = name
-        this.age = age
-    }
+// class Person {
+//     constructor(name, age) {
+//         this.name = name
+//         this.age = age
+//     }
 
-    eat() {console.log('Ем...')}
-    sleep() {console.log('Сплю...')}
-}
+//     eat() {console.log('Ем...')}
+//     sleep() {console.log('Сплю...')}
+// }
 
-class Developer extends Person {
-    constructor(name, age, experience) {
-        super(name, age)
-        this.experience = experience
-    }
-    writeCode() {console.log('Пишу код...')}
+// class Developer extends Person {
+//     constructor(name, age, experience) {
+//         super(name, age)
+//         this.experience = experience
+//     }
+//     writeCode() {console.log('Пишу код...')}
 
-    sleep() {
-        console.log('Сплю только днём...')
-        this.writeCode()
-    }
-}
+//     sleep() {
+//         console.log('Сплю только днём...')
+//         this.writeCode()
+//     }
+// }
 
-const developerExample = new Developer('Миша', 23, 5) // хотим добавить 3 параметр - годы опыта
+// const developerExample = new Developer('Миша', 23, 5) // хотим добавить 3 параметр - годы опыта
 
-console.log('Количество лет опыта:', developerExample.experience)
+// console.log('Количество лет опыта:', developerExample.experience)
 
 
