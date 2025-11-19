@@ -249,4 +249,3 @@ secondStudent.logAge()
 
 // console.log('Количество лет опыта:', developerExample.experience)
 
-
