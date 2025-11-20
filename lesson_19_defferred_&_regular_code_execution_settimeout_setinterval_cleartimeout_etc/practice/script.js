@@ -118,12 +118,122 @@ const users = [
 Используй метод .map() и .join('') (чтобы склеить массив строк в одну строку).
 */
 
-const users = [
-  { id: 1, name: 'Alice', isAdmin: true },
-  { id: 2, name: 'Bob', isAdmin: false },
-  { id: 3, name: 'Charlie', isAdmin: false, },
-]
+// const users = [
+//   { id: 1, name: 'Alice', isAdmin: true },
+//   { id: 2, name: 'Bob', isAdmin: false },
+//   { id: 3, name: 'Charlie', isAdmin: false, },
+// ]
 
-const renderUsers = (usersList) => {
-    return 
+// const renderUsers = (usersList) => {
+//     // const list = usersList.map(({name, isAdmin}) => { 
+//     //     if (isAdmin) {
+//     //         return `<div class="user-card"><h3>${name}</h3><span class="badge">Admin</span></div>`
+//     //     }
+//     //     return `<div class="user-card"><h3>${name}</h3></div>`
+    
+//         // можно сократить записью через тернарный оператор:
+
+//     const list = usersList.map(({name, isAdmin}) => {
+//         return `<div class="user-card">
+//                     <h3>${name}</h3>
+//                     ${isAdmin ? '<span class="badge">Admin</span>' : ''}
+//                 </div>`
+//     }).join('')
+//     return `<div class="users-container">${list}</div>`
+
+
+// }
+// console.log(renderUsers(users))
+
+///////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 6
+
+/*
+"Обратный отсчет" (Easy)
+Тема: setInterval, clearInterval, условные конструкции.
+
+Напиши функцию startCountdown(seconds).
+
+Она принимает количество секунд (число).
+
+Каждую секунду она пишет в консоль текущее число: 10, 9, 8...
+
+Когда доходит до 0, она пишет "Поехали! 🚀" и останавливает таймер.
+
+Важно: Не забудь сохранить ID таймера в переменную, чтобы потом передать его в clearInterval
+*/
+
+// const startCountdown = (seconds) => {
+//     let counter = seconds
+//     console.log(counter)
+//     counter--
+//     const intervalId = setInterval(() => {
+//         if (counter < 0) {
+//             clearInterval(intervalId)
+//             console.log('Поехали!')
+//         } else {
+//             console.log(counter)
+//             counter--
+//         }
+//     }, 1000);
+// }
+
+//  startCountdown(5)
+
+////////////////////////////////////////////////////////////////////////////////
+
+// ЗАДАЧА 7
+
+/*
+"Поиск сервера" (Medium)
+Тема: Классы, this, setInterval, случайные числа.
+
+Представь, что наше приложение пытается подключиться к серверу, который то работает, то нет.
+
+Напиши класс ServerConnector.
+
+Конструктор принимает maxRetries (сколько раз пытаться подключиться, например, 5).
+
+Метод connect(), который запускает интервал (раз в 1 секунду).
+
+Внутри интервала:
+
+Увеличиваем счетчик попыток.
+
+Пишем в консоль: Попытка соединения #${номер}...
+
+Имитируем удачу: Math.random() > 0.8 (20% шанс успеха).
+
+Если повезло: Пишем "Подключено!" и останавливаем интервал.
+
+Если количество попыток превысило maxRetries: Пишем "Ошибка соединения: Сервер недоступен" и останавливаем интервал.
+
+Подсказка для 2-й задачи: Чтобы остановить интервал внутри метода класса, тебе нужно где-то хранить его ID. Обычно это делают в this.intervalId.
+*/
+
+class ServerConnector {
+    constructor (maxRetries) {
+        this.maxRetries = maxRetries
+    }
+
+    connect() {
+        let numberAttempt = 1
+        const intervalId = setInterval(() => {
+            console.log(`Попытка соединения #${numberAttempt}`)
+            numberAttempt++
+            if (Math.random() > 0.8) {
+                console.log("Подключено!")
+                clearInterval(intervalId)
+            }
+            if (numberAttempt > this.maxRetries) {
+                console.log("Ошибка соединения: Сервер недоступен")
+                clearInterval(intervalId)
+            }
+        }, 1000);
+    }
 }
+
+const connecting = new ServerConnector(5)
+
+connecting.connect()
