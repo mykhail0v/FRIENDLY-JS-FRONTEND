@@ -30,7 +30,7 @@
 
 // событийный цикл создаёт очередь из всех ассинхронных задач
 
-// // Синхронный код, выполняющийся сразу
+// Синхронный код, выполняющийся сразу
 // console.log('Начало программы')
 
 // // Асинхронная операция с использованием setTimeout
@@ -157,30 +157,30 @@
  * catch() - обрабатывает rejected состояние
  */
 
-// const promise = new Promise((fulfill, reject) => {
-//     console.log('Начало, состояние pending...')
+const promise = new Promise((fulfill, reject) => {
+    console.log('Начало, состояние pending...')
 
-//     setTimeout(() => {
-//         if(Math.random() > 0.5) {
-//             fulfill('Ура, состояние fulfilled')
-//         } else {
-//             reject (
-//                 'Увы, состояние rejected'
-//             )
-//         }
-//     }, 3000);
-// })
+    setTimeout(() => {
+        if(Math.random() > 0.5) {
+            fulfill('Ура, состояние fulfilled')
+        } else {
+            reject (
+                'Увы, состояние rejected'
+            )
+        }
+    }, 3000);
+})
 
-// promise
-//     .then((successData) => {
-//         console.log('Успех! Полученны данные:', successData)
-//     })
-//     .catch((errorData) => {
-//         console.log('Ошибка. Получены данные:', errorData)
-//     })
-//     .finally(() => {
-//         console.log('Код, выполняющийся в самом конце, независимо от результата.')
-//     })
+promise
+    .then((successData) => {
+        console.log('Успех! Полученны данные:', successData)
+    })
+    .catch((errorData) => {
+        console.log('Ошибка. Получены данные:', errorData)
+    })
+    .finally(() => {
+        console.log('Код, выполняющийся в самом конце, независимо от результата.')
+    })
 
 /////////////////////////////////////////////////////////
 
@@ -288,21 +288,22 @@
 
 ////////////////////////////////
 
-const makeRequest = async (url, onSuccess) => { 
-    return new Promise((fulfill) => {
-        fulfill('Ура, состояние fulfilled')
-    })
-}
+// const makeRequest = async (url, onSuccess) => { 
+//     return new Promise((fulfill) => {
+//         fulfill('Ура, состояние fulfilled')
+//     })
+// }
 
-try {
-    const seller = await makeRequest(`/api/products/${sellerId}`)
-    const firstProductId = seller.productIds[0]
+// try {
+//     const seller = await makeRequest(`/api/products/${sellerId}`)
+//     const firstProductId = seller.productIds[0]
 
-    const product = await makeRequest(`/api/products/${firstProductId}`)
-    const firstReviewId = product.reviewIds[0]
+//     const product = await makeRequest(`/api/products/${firstProductId}`)
+//     const firstReviewId = product.reviewIds[0]
 
-    const review = await makeRequest(`/api/reviews/${firstReviewId}`)
-    const authorName = review.author.name
-} catch(error) {
-    console.log(error)
-}
+//     const review = await makeRequest(`/api/reviews/${firstReviewId}`)
+//     const authorName = review.author.name
+// } catch(error) {
+//     console.log(error)
+// }
+
