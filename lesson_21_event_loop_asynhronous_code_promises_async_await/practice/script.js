@@ -387,20 +387,302 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 Выведи итоговый результат (должно быть 40).
 */
 
-const doubleNumber = (num) => 
-        new Promise((resolve) => {
+// const doubleNumber = (num) => 
+//         new Promise((resolve) => {
+//             setTimeout(() => {
+//                 resolve(num * 2)
+//             }, 1000);
+//         })
+
+// const calculate = async () => {
+//     const step1 = await doubleNumber(10)
+//     console.log('step1:', step1)
+//     const step2 = await doubleNumber(step1)
+//     console.log('step2:', step2)
+//     console.log('result:', step2)
+
+// }
+
+// calculate()
+
+/////////////////////////////////////////////////////////////////////////
+
+/*
+Задача 12: (С подсказками): Напиши универсальную функцию sleep(ms).
+
+Она принимает количество миллисекунд.
+
+Возвращает Промис.
+
+Промис должен выполняться (resolve) через указанное время.
+
+Затем создай асинхронную функцию startSystem, которая:
+
+Пишет в консоль 'Запуск...'
+
+Ждет 2 секунды (используя твою функцию sleep).
+
+Пишет 'Готово!'
+*/
+
+// const sleep = (ms) => new Promise ((resolve) => {
+//     setTimeout(() => {
+//         resolve()
+//     }, ms);
+// })
+
+// const startSystem = async() => {
+//     // console.log('Запуск...')
+//     await sleep(2000)
+//     // console.log('Готово!')
+// }
+
+// startSystem()
+
+///////////////
+
+/*
+Задача 13: Заказ в МакДональдс (С подсказками)
+Давай симулируем заказ комбо-обеда. Нам нужно приготовить Бургер и Налить Колу. Мы будем делать это параллельно.
+
+Используй свою функцию sleep для задержек.
+
+Твоя задача:
+
+Оставь функцию sleep.
+
+Напиши функцию makeBurger: выводит 'Начал жарить котлету', ждет 3 секунды (sleep), выводит 'Бургер готов!' и возвращает строку '🍔'.
+
+Напиши функцию pourCola: выводит 'Начал лить колу', ждет 1 секунду, выводит 'Кола готова!' и возвращает строку '🥤'.
+
+Напиши асинхронную функцию orderCombo.
+
+Внутри неё используй await Promise.all([...]), чтобы запустить обе функции одновременно. Результат сохрани в переменную results.
+
+Выведи в консоль: 'Заказ получен: 🍔 🥤' (используя данные из results).
+*/
+
+// const makeBurger = async() => {
+//     console.log('Начал жарить котлету')
+//     await sleep(3000)
+//     console.log('Бургер готов!')
+//     return '🍔'
+// }
+
+// const pourCola = async() => {
+//     console.log('Начал лить колу')
+//     await sleep(1000)
+//     console.log('Кола готова')
+//     return '🥤'
+// }
+
+// const orderCombo = async() => {
+//     const result = await Promise.all([
+//         makeBurger(),
+//         pourCola(),
+//     ])
+//     console.log(`Заказ получен: ${result}`)
+// }
+
+// orderCombo()
+
+//////////////
+
+/*
+Задача 14: Гонка серверов (С подсказками)
+У нас есть два зеркала сервера: serverEurope и serverAsia. Нужно узнать, какой из них ответит быстрее.
+
+Твоя задача:
+
+Оставь функцию sleep.
+
+Напиши функцию requestEurope(): ждет 2 секунды, возвращает строку 'Европа'.
+
+Напиши функцию requestAsia(): ждет 5 секунд, возвращает строку 'Азия'.
+
+Создай асинхронную функцию checkPing.
+
+Внутри запусти их "гонку" через Promise.race.
+
+Результат (имя победителя) сохрани в переменную winner.
+
+Выведи в консоль: 'Победил сервер: ...'.
+*/
+
+// const requestEurope = async() => {
+//     await sleep(2000)
+//     return 'Европа'
+// }
+
+// const requestAsia = async() => {
+//     await sleep(5000)
+//     return 'Азия'
+// }
+
+// const checkPing = async() => {
+//     const winner = await Promise.race([
+//         requestAsia(),
+//         requestEurope(),
+//     ])
+//     console.log(`ПОБЕДИЛ СЕРВЕР: ${winner}!!!`)
+// }
+
+// checkPing()
+
+//////////////
+
+/*
+Задача 15: Ограничение времени (С подсказками)
+Легенда: Мы скачиваем тяжелый файл. Если это занимает больше 2 секунд, мы должны прервать ожидание с ошибкой "Слишком долго!".
+
+Твоя задача:
+
+Оставь функцию sleep.
+
+Напиши функцию heavyDownload: ждет 3 секунды (имитация медленного интернета) и возвращает 'Файл скачан'.
+
+Напиши функцию timeout(ms):
+
+Принимает время.
+
+Возвращает new Promise.
+
+Внутри таймера делает reject (НЕ resolve!) с текстом 'Ошибка: Время вышло!'.
+
+Напиши асинхронную функцию app.
+
+Внутри сделай try...catch.
+
+В try: запусти Promise.race. В массиве два участника: heavyDownload() и timeout(2000).
+
+Если победит загрузка — выведи результат.
+
+В catch: выведи ошибку, которую выбросит таймер.
+*/
+
+// const heavyDownload = async() => {
+//     await sleep(3000)
+//     return 'Файл скачан'
+// }
+
+// const timeout = (ms) => new Promise((_, reject) => {
+//     setTimeout(() => {
+//         reject('Ошибка, время вышло')
+//     }, ms);
+// })
+
+// const app = async() => {
+//     try {
+//         const result = await Promise.race([
+//             heavyDownload(),
+//             timeout(3000),
+//         ])
+//         console.log('Ура:',result)
+//     } catch (error) {
+//         console.log('Провал:', error)
+//     }
+// }
+
+// app()
+
+//////////////////////////////////////////////////////////////////////
+
+/*
+Задача 16: Банковская система транзакций
+Легенда: Ты пишешь ядро банковского приложения. Нужно реализовать перевод денег между двумя пользователями. Но есть нюанс: данные пользователей лежат в "базе данных" (массиве), и доступ к ним занимает время.
+
+Твои инструменты:
+
+Класс Bank.
+
+Массив пользователей: [{ id: 1, name: 'Alex', balance: 500 }, { id: 2, name: 'Max', balance: 100 }].
+
+ТЗ (Техническое задание):
+
+Конструктор: Принимает начальный массив пользователей и сохраняет его в this.users.
+
+Метод findUser(id):
+
+Возвращает Промис.
+
+Ищет пользователя в this.users (используй .find()).
+
+Имитирует задержку 500мс (setTimeout).
+
+Если пользователь найден — resolve(user).
+
+Если не найден — reject('Пользователь не найден').
+
+Метод transfer(fromId, toId, amount):
+
+Это async метод.
+
+Сначала находит отправителя (fromId) через await this.findUser.
+
+Потом находит получателя (toId) через await this.findUser.
+
+Проверка: Если у отправителя баланс меньше amount — выбрасывает ошибку (throw new Error('Недостаточно средств')).
+
+Логика: Отнимает деньги у одного, прибавляет другому.
+
+Возвращает объект сделки: { status: 'Успех', from: ..., to: ... }.
+
+Сценарий (main):
+
+Создай банк с юзерами.
+
+В блоке try/catch попытайся перевести 200 монет от Алекса к Максу.
+
+Выведи балансы пользователей после перевода (console.log).
+
+(Дополнительно) Попробуй перевести больше денег, чем есть, чтобы проверить ошибку.
+*/
+
+const usersDB = [
+  { id: 1, name: 'Alex', balance: 500 },
+  { id: 2, name: 'Max', balance: 100 },
+]
+
+class Bank {
+    constructor(users){
+        this.users = users
+    }
+
+    findUser(id) {
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve(num * 2)
-            }, 1000);
+                const user = this.users.find((user) => user.id === id)
+                if (user) {
+                    resolve(user)
+                } else {
+                    reject('Пользователь не найден')
+                }
+            }, 500);
         })
+    }
 
-const calculate = async () => {
-    const step1 = await doubleNumber(10)
-    console.log('step1:', step1)
-    const step2 = await doubleNumber(step1)
-    console.log('step2:', step2)
-    console.log('result:', step2)
+    async transfer(fromId, toId, amount) {
+        const userFrom = await this.findUser(fromId)
+        const userTo = await this.findUser(toId)
+        if (userFrom.balance < amount) {
+            throw new Error('Недостаточно средств') 
+        }
+        userFrom.balance -= amount
+        userTo.balance += amount
 
+        return {status: 'Успех', from: userFrom, to: userTo}   
+    }
 }
 
-calculate()
+const bank = new Bank(usersDB)
+
+const main = async() => {
+    try {
+        const result = await bank.transfer(1, 2, 200)
+        console.log(result)
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+main()
